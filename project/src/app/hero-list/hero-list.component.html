@@ -1,0 +1,52 @@
+<p>
+  hero-list works!
+</p>
+<p *ngIf="actionMessage" [style.color]="isdeleted || serverError ? 'red': 'green'">{{actionMessage}}</p>
+<h2>Add Hero</h2>
+<form (ngSubmit)="addHero(addHeroForm)" #addHeroForm="ngForm">
+  <div>
+    <input type="text" name="heroName" [(ngModel)]="newHero.name">
+    <input type="text" name="heroEmail" [(ngModel)]="newHero.email">
+    <input type="text" name="heroPhone" [(ngModel)]="newHero.phone">
+    <input type="submit" name="Add" value="Add">
+  </div>
+  <div></div>
+</form>
+<hr>
+
+<h2>Hero List</h2>
+
+<table border="1px">
+  <tr>
+    <th>Sr.</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  <tr *ngFor="let hero of allHero; let i=index;">
+    <td>{{i+1}}</td>
+    <td>{{hero.name}}</td>
+    <td>{{hero.email}}</td>
+    <td>{{hero.phone}}</td>
+  </tr>
+</table>
+<!-- <ul>
+  <li *ngFor="let hero of allHero" (Rclick)="deleteHero(hero)">
+    {{hero.name}}
+  </li>
+</ul> -->
+<br>
+<h2>Hero Search</h2>
+<input type="text" name="search" (keyup)="searchHero($event)">
+<br>
+<div *ngIf="searchedHero.length">
+    <hr>
+  <h2>Searched Heros</h2>
+  <ul>
+    <li *ngFor="let hero of searchedHero" (click)="selectHero(hero)">
+      {{hero.name}}
+    </li>
+  </ul>
+</div>
+<app-hero-detail *ngIf="selectedHero.name" [heroSelected]="selectedHero" (updateHeroDetails)='hasNameUpdated($event)' (deleteHeroDetails)='deleteHero($event)'></app-hero-detail>
+<!-- <app-hero-detail *ngIf="selectedHero" [heror]="selectedHero" (updateHeroDetails)='deleteHero($event)'></app-hero-detail> -->

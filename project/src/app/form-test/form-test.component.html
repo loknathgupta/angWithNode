@@ -1,0 +1,35 @@
+<p>
+  form-test works!
+</p>
+<form (ngSubmit)="addUser(userForm)" #userForm="ngForm" >
+  <div class="form-froup">
+    <label>User Name</label>
+    <input type="text" name="user_name" [(ngModel)]="user.name" required #name="ngModel">
+    <div [hidden]="(name.valid || name.pristine)" class="alert alert-danger">
+      Name is required
+    </div>
+  </div>
+  <div class="form-froup">
+    <label>User Group</label>
+    <select name="user_group" [(ngModel)]="user.group">
+      <option value="" selected>Select</option>
+      <option *ngFor="let group of groups" [value]="group">{{group}}</option>
+    </select>
+  </div>
+
+  <div class="form-froup">      
+    <input type="submit" name="Add User">
+  </div>
+</form>
+<div class="userlist">
+  <ul>
+    <li>
+      <div class="head name">Name</div>
+      <div class="head group">Group</div>
+    </li>
+    <li *ngFor="let user of users">
+        <div class="name">{{user.user_name}}</div>
+        <div class="group">{{user.user_group}}</div>
+    </li>
+  </ul>
+</div>

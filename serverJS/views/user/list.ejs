@@ -1,0 +1,29 @@
+<h2> Add User</h2>
+<form action="" method="post">
+    <input name="name">
+    <input name="email">
+    <input name="phone">
+    <input type="submit" name="save" value="Save">
+</form>
+
+<h2>USER LIST</h2>
+<table width="100%" border="1px">
+    <tr>
+        <th>Sr.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    <%
+    let counter = 1;
+     users.forEach(function(user) {  %>
+        <tr>
+                <th><%= counter %></th>
+                <th><%= user.name%></th>
+                <th><%= user.email%></th>
+                <th><%= user.phone%></th>
+            </tr>
+    <% counter++; }); %>
+    
+
+</table>
