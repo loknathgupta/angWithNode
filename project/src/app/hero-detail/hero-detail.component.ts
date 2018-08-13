@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Hero} from '../hero';
 
 @Component({
   selector: 'app-hero-detail',
@@ -7,7 +8,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() heroSelected: Object;
+  @Input() heroSelected: Hero;
   @Output() updateHeroDetails = new EventEmitter();
   @Output() deleteHeroDetails = new EventEmitter();
   oldName : String;
@@ -22,14 +23,14 @@ export class HeroDetailComponent implements OnInit {
     this.isdeleted = false;
   }
 
-  // updateHero(updatedData:NgForm){ 
-  //   console.log(updatedData.value);
-  //   this.updateHeroDetails.emit(updatedData); 
-  // }
+  updateHero(updatedData:NgForm){ 
+    console.log(updatedData.value);
+    this.updateHeroDetails.emit(updatedData); 
+  }
 
-  // deleteHero(){
-  //   this.deleteHeroDetails.emit(this.heror);  
-  //   this.isdeleted = true;
-  // }
+  deleteHero(){
+    this.deleteHeroDetails.emit(this.heroSelected);  
+    this.isdeleted = true;
+  }
 
 }

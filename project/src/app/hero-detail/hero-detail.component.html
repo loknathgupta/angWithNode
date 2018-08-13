@@ -3,13 +3,14 @@
 </p>
 
 <hr>
-<h2>{{heror}} Detail</h2>
+<h2>{{heroSelected.name}} Detail</h2>
 
+
+<button [style.color]="isdeleted ? 'red': 'green'" (click)="deleteHero()">Delete Hero</button>
 <form (ngSubmit)="updateHero(HeroForm)" #HeroForm="ngForm">
   <input [(ngModel)]="heroSelected.name" placeholder="name" name="new-name" placeholder="Name">
   <input [(ngModel)]="heroSelected.email" placeholder="name" name="email" placeholder="Name">
   <input [(ngModel)]="heroSelected.phone" placeholder="name" name="phone" placeholder="Name">
   <input [(ngModel)]="oldName" placeholder="name" name="old-name" type="hidden">
   <input type="submit" name="Update">
-  <button [style.color]="isdeleted ? 'red': 'green'" (click)="deleteHero()">Delete Hero</button>
 </form>

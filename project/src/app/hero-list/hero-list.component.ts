@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HeroService } from '../hero.service';
 import 'rxjs/Rx'
+import {Hero} from '../hero';
 
 @Component({
   selector: 'app-hero-list',
@@ -10,51 +11,43 @@ import 'rxjs/Rx'
 })
 export class HeroListComponent implements OnInit {
   heroes: String[] = [];
-
   newHeroName: String = '';
-  selectedHero: any = {name:''};
-  searchedHero: any = [];
+
+  selectedHero: Hero = new Hero();
+  searchedHero: Hero[] = [];
   searchtext: String;
   actionMessage: String = '';
   isdeleted: Boolean = false;
   serverError: Boolean = false
-  allHero: any = [];
-  newHero: Object = { name: '', email: '', phone: '' };
+  allHero: Hero[] = [];
+  newHero: Hero = new Hero();
 
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
-    //this.heroes = ['Ajay', 'Sunny', 'Abhay', 'Tushar', 'Ranveer', 'Sanjay'];
-    //this.heroes = [];
     this.heroService.findHero('')
       .subscribe(
-        (heros) => {
-          console.log(heros);
+        (heros:Hero[]) => {
           this.allHero = heros;
-          for (let hero in heros) {
-            //this.heroes.push(heros[hero]);
-            //this.allHero[heros[hero]['id']] = heros[hero];
-          }
-          //console.log(this.allHero);
         },
-        (error) => {
+        (err) => {
           this.serverError = true;
-          this.actionMessage = 'Server side error occured.(' + error.message + ')';
-          console.error(error.message);
+          this.actionMessage = 'Server side error occured.(' + err.message + ')';
+          console.error(err.message);
         }
       );
   }
 
   addHero(addHeroForm: NgForm) {
-    console.log(this.allHero);
-    console.log(this.newHero);
     this.heroService.addHero(this.newHero)
       .subscribe(
-        (addedHero) => {
+        (addedHero:Hero) => {
           this.allHero.push(addedHero);
-          console.log(this.allHero);
+          this.actionMessage = 'Hero has been added.';
         },
         (err) => {
+          this.serverError = true;
+          this.actionMessage = 'Server side error occured.(' + err.message + ')';
           console.error(err.message);
         }
       );
@@ -63,49 +56,53 @@ export class HeroListComponent implements OnInit {
   searchHero(event: any) {
     let inputText = event.target.value;
     this.searchtext = inputText;
-    var sHero = [];
-    this.allHero.forEach(function (hero) {
+    var matchedHero:Hero[] = [];
+    this.allHero.forEach(function (hero:Hero) {
       if (hero.name.indexOf(inputText) != -1) {
-        sHero.push(hero);
+        matchedHero.push(hero);
       }
     });
-
-    this.searchedHero = sHero;
-    if (sHero.length) {
+    if (matchedHero.length) {
       this.actionMessage = 'Hero with searched key found.';
     }
-    this.selectedHero = {};
+
+    this.searchedHero = matchedHero;
+    this.selectedHero = new Hero();
   }
 
-  selectHero(hero: Object) {
+  selectHero(hero: Hero) {
       this.selectedHero = hero;
   }
 
   hasNameUpdated(newDetails: NgForm) {
-    var data = newDetails.value;
-    var oldName = data['old-name'];
-    var newName = data['new-name'];
-    if (this.heroes.indexOf(oldName) != -1) {
-      this.heroes[this.heroes.indexOf(oldName)] = newName;
-      this.actionMessage = 'Hero name has been updated from ' + oldName + ' to ' + newName + '.'
-    }
-    if (this.searchedHero.indexOf(oldName) != -1) {
-      this.searchedHero[this.searchedHero.indexOf(oldName)] = newName;
-    }
+    // var data = newDetails.value;
+    // var oldName = data['old-name'];
+    // var newName = data['new-name'];
+    // if (this.heroes.indexOf(oldName) != -1) {
+    //   this.heroes[this.heroes.indexOf(oldName)] = newName;
+    //   this.actionMessage = 'Hero name has been updated from ' + oldName + ' to ' + newName + '.'
+    // }
+    // if (this.searchedHero.indexOf(oldName) != -1) {
+    //   this.searchedHero[this.searchedHero.indexOf(oldName)] = newName;
+    // }
   }
 
 
-  deleteHero(hero: String) {
-    if (this.heroes.indexOf(hero) != -1) {
-      this.heroes.splice(this.heroes.indexOf(hero), 1);
-      this.isdeleted = true;
-    }
-    if (this.searchedHero.indexOf(hero) != -1) {
-      this.searchedHero.splice(this.searchedHero.indexOf(hero), 1);
-    }
+  deleteHero(heroToDelete: Hero) {
+    var heroId = heroToDelete.id;    
+    this.selectedHero = new Hero();
+    this.searchedHero.forEach((hero, index)=>{
+      if(hero.id == heroId){
+        this.searchedHero.splice(index, 1);
+      }
+    });
 
-    this.selectedHero = '';
-    this.actionMessage = 'Hero with name ' + hero + ' has been deleted.';
-  }
+    this.allHero.forEach((hero, index)=>{
+      if(hero.id == heroId){
+        this.allHero.splice(index, 1);
+      }
+    });
+    
+ }
 
 }
