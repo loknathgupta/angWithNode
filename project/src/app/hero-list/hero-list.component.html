@@ -47,5 +47,5 @@
     </li>
   </ul>
 </div>
-<app-hero-detail *ngIf="selectedHero.name" [heroSelected]="selectedHero" (updateHeroDetails)='hasNameUpdated($event)' (deleteHeroDetails)='deleteHero($event)'></app-hero-detail>
+<app-hero-detail *ngIf="selectedHero.name" [heroSelected]="selectedHero" (updateHeroDetails)='heroUpdated($event)' (deleteHeroDetails)='deleteHero($event)'></app-hero-detail>
 <!-- <app-hero-detail *ngIf="selectedHero" [heror]="selectedHero" (updateHeroDetails)='deleteHero($event)'></app-hero-detail> -->

@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable}  from 'rxjs';
 import {_throw} from 'rxjs/observable/throw';
 import { map, catchError } from 'rxjs/operators';
+import {Hero} from './hero';
 
 
 
@@ -20,7 +21,7 @@ export class HeroService {
     
   }
 
-  addHero(userData:Object){
+  addHero(userData:Hero){
     return this.http
     .post('http://localhost:4343/user/add', userData)
     .map(function(res){
@@ -28,5 +29,25 @@ export class HeroService {
       return res;
     });
   }
+
+  deleteHero(userId:Number){
+    return this.http
+    .get('http://localhost:4343/user/delete/'+userId)
+    .map(function(res){
+      console.log(res);
+      return res;
+    });
+  }
+
+  updateHero(udatedData: Hero){
+    return this.http
+    .post('http://localhost:4343/user/update', udatedData)
+    .map(function(res){
+      console.log(res);
+      return res;
+    });
+  }
+
+
 
 }

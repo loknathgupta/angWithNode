@@ -74,7 +74,21 @@ export class HeroListComponent implements OnInit {
       this.selectedHero = hero;
   }
 
-  hasNameUpdated(newDetails: NgForm) {
+  heroUpdated(newDetails: Hero) {
+
+    console.log(newDetails);
+    this.heroService.updateHero(newDetails)
+      .subscribe(
+        (updateData:any) => {
+          this.actionMessage = 'Hero has been updated.';
+        },
+        (err) => {
+          this.serverError = true;
+          this.actionMessage = 'Server side error occured.(' + err.message + ')';
+          console.error(err.message);
+        }
+      );
+
     // var data = newDetails.value;
     // var oldName = data['old-name'];
     // var newName = data['new-name'];
@@ -89,19 +103,33 @@ export class HeroListComponent implements OnInit {
 
 
   deleteHero(heroToDelete: Hero) {
-    var heroId = heroToDelete.id;    
-    this.selectedHero = new Hero();
-    this.searchedHero.forEach((hero, index)=>{
-      if(hero.id == heroId){
-        this.searchedHero.splice(index, 1);
+    var heroId = heroToDelete.id; 
+    
+    this.heroService.deleteHero(heroId)
+    .subscribe(
+      (data:any)=>{
+        console.log(data);
+        if(data.affectedRows >0){
+          this.actionMessage = 'Hero has been deleted permanently.';
+          this.searchedHero.forEach((hero, index)=>{
+            if(hero.id == heroId){
+              this.searchedHero.splice(index, 1);
+            }
+          });
+      
+          this.allHero.forEach((hero, index)=>{
+            if(hero.id == heroId){
+              this.allHero.splice(index, 1);
+            }
+          });
+             
+          this.selectedHero = new Hero();
+        }
+      },
+      (err) => {
+        console.log(err);
       }
-    });
-
-    this.allHero.forEach((hero, index)=>{
-      if(hero.id == heroId){
-        this.allHero.splice(index, 1);
-      }
-    });
+    );
     
  }
 

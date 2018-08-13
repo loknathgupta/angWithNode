@@ -24,8 +24,8 @@ export class HeroDetailComponent implements OnInit {
   }
 
   updateHero(updatedData:NgForm){ 
-    console.log(updatedData.value);
-    this.updateHeroDetails.emit(updatedData); 
+    //console.log(updatedData.value);
+    this.updateHeroDetails.emit(updatedData.value); 
   }
 
   deleteHero(){
