@@ -7,7 +7,7 @@
 
 
 <button [style.color]="isdeleted ? 'red': 'green'" (click)="deleteHero()">Delete Hero</button>
-<form (ngSubmit)="updateHero(HeroForm)" #HeroForm="ngForm">
+<form (ngSubmit)="updateHero($event)" #HeroForm="ngForm">
   <input [(ngModel)]="heroSelected.id" placeholder="id" name="id" placeholder="Id" type="hidden">
   <input [(ngModel)]="heroSelected.name" placeholder="name" name="name" placeholder="Name">
   <input [(ngModel)]="heroSelected.email" placeholder="name" name="email" placeholder="Name">

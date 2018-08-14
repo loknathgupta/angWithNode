@@ -11,7 +11,6 @@ export class HeroDetailComponent implements OnInit {
   @Input() heroSelected: Hero;
   @Output() updateHeroDetails = new EventEmitter();
   @Output() deleteHeroDetails = new EventEmitter();
-  oldName : String;
   isdeleted : Boolean;
 
   constructor() {}
@@ -19,7 +18,6 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     //alert('hhhh');
     console.log(this.heroSelected);
-    this.oldName = this.heroSelected.name;
     this.isdeleted = false;
   }
 
@@ -27,6 +25,8 @@ export class HeroDetailComponent implements OnInit {
     //console.log(updatedData.value);
     this.updateHeroDetails.emit(updatedData.value); 
   }
+
+  
 
   deleteHero(){
     this.deleteHeroDetails.emit(this.heroSelected);  
