@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var config = require('./config');
+var db = require('./model/db');
 app.locals.configuration = config;
 
 app.set('view engine', 'ejs');
@@ -17,6 +18,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /***************SESSION ************/
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+
+//STORING SESSION IN DATABASE ***************************************
+var MySQLStore = require('express-mysql-session');
+var sessionStore = new MySQLStore({}, db);
+//STORING SESSION IN DATABASE ***************************************
+ 
 app.use(cookieParser());
 app.use(session({
     secret: "MIS INVOICE",
@@ -25,7 +32,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     rolling :true,
-    cookie:{maxAge:(60*60*1000)}
+    cookie:{maxAge:(2*60*1000)},
+    store: sessionStore
 }));
 /***************ENDED HERE SESSION */
 var flash = require('express-flash');

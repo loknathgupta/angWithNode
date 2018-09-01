@@ -6,7 +6,8 @@ var con = mysql.createConnection({
     password:"",
     database:"mis_invoice",
     //database:"mis_live",
-    multipleStatements: true
+    multipleStatements: true,
+    //debug: true
 });
 
 con.connect((err) => {

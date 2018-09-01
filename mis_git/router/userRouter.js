@@ -252,6 +252,7 @@ router.all('/login', function (req, res, next) {
                             user_name: user_name,
                             user_role: user_role_id
                         };
+                        //console.log(sess.userData);
                         let hasAccessUpTo = 'All';
                         if(sess.userData.v_usertype.indexOf('PM') != -1){
                             hasAccessUpTo = "PM";
@@ -304,7 +305,7 @@ router.all('/login', function (req, res, next) {
                                                 //  console.log(this.sql);
                                                 sess.userData.parentMenuAll = pMenuAll;
                                                 sess.userData.childMenuAll = cMenuAll;
-                                                console.log(req.body.referedFrom);
+                                                //console.log(req.body.referedFrom);
                                                 // if(req.body.referedFrom && req.body.referedFrom != req.protocol + "://" + req.get('host') +'/user/login'){
                                                 //     res.redirect(req.body.referedFrom);
                                                 // }else{
