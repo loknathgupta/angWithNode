@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "debug": "^3.1.0",
+    "dotenv": "^6.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.3",
     "express-flash": "0.0.2",
@@ -42,7 +43,7 @@
     "request": "^2.87.0",
     "save": "^2.3.2",
     "serve-static": "^1.13.2",
-    "socket.io": "^2.1.0"
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.2"

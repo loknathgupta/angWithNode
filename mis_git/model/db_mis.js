@@ -11,6 +11,6 @@ var conMis = mysql.createConnection({
 
 conMis.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
+    console.log('Connected to DB2!');
   });
 module.exports = conMis;

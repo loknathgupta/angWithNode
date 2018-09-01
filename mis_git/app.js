@@ -1,9 +1,11 @@
-var http = require('http');
 var express = require('express');
-var path = require('path');
 var app = express();
+var http = require('http').Server(app);
+var path = require('path');
 var config = require('./config');
 var db = require('./model/db');
+var io = require('socket.io')(http);
+
 app.locals.configuration = config;
 
 app.set('view engine', 'ejs');
@@ -32,7 +34,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     rolling :true,
-    cookie:{maxAge:(2*60*1000)},
+    cookie:{maxAge:(24*60*1000)},
     store: sessionStore
 }));
 /***************ENDED HERE SESSION */
@@ -90,6 +92,9 @@ app.use('/access', accessRouter);
 var activityReportRouter = require('./router/activityReportRouter');
 app.use('/activity_log', activityReportRouter);
 
+var chatRouter = require('./router/chatRouter');
+app.use('/chat', chatRouter);
+
 
 /*******ROUTING ENDS HERE */
 
@@ -102,7 +107,19 @@ app.use(function (err, req, res, next) {
 })
 /************Error HANDLER ENDES HERE*/
 
+//SOCKET EVENT*************************************
+io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+    socket.on('send message', function(msg){
+        console.log('message: ' + msg);
+    });
+});
+//SOCKET EVENT*************************************
 
-var server = http.createServer(app).listen('7070');
-console.log('Server is serted and listening on 7070');
+http.listen('7070', function(){    
+    console.log('Server is serted and listening on 7070');
+});
 
