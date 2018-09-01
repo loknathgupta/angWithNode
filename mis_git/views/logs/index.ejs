@@ -1,0 +1,74 @@
+<% include ../layout/header %>
+    <% var currentDate = new Date(); %>
+        <!--Left Side Starts-->
+        <div class="fix-left-side left-side-menu">
+            <!--Logo Area Starts-->
+            <% include ../layout/logo-section %>
+                <!--Logo Area Ends-->
+                <!--Left side Menu Starts-->
+                <% include ../layout/left-menu %>
+                    <!--Left Menu Ends-->
+        </div>
+        <!--Left Side Ends-->
+
+        <!--Header Right Menu starts-->
+        <% include ../layout/header-right-menu %>
+            <!--Header Right Menu Ends-->
+
+            </div>
+            <!--Right Side Header Ends-->
+
+            <!--Content Wrapper Starts-->
+            <div class="content-wrapper">
+
+                <!-- Drag and Drog Functionality Div Starts-->
+                <div class="sortable">
+                    <div class="col-md-12">
+                        <!--editable starts-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                Activity Log
+                                <div class="clearfix add-new pull-right" id="dataTableButtons">
+
+                                </div>
+
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-md-3 padding-zero">
+                                        <label for="exampleInputName2">Action Taken By: </label>
+                                        <span id="actionBy"></span>
+                                </div>
+
+                                <div class="col-md-3 padding-zero">
+                                        <label for="exampleInputName2">Module Name: </label>
+                                        <span id="moduleName"></span>
+                                </div>
+
+                                <form method="POST" id="lst-frm">
+                                    <table class="table table-striped table-hover table-bordered display dataTable no-footer" id="activityLogs">
+                                        <thead>
+                                            <tr>
+                                                <th width="15%">Action Date</th>
+                                                <th width="15%">Action Taken By</th>
+                                                <th width="15%">Module Name</th>
+                                                <th>Action Message</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Editable Table Ends-->
+
+                </div>
+            </div>
+            <!-- Drag and Drog Functionality Div Starts-->
+            </div>
+            <!--Content Wrapper Ends-->
+
+            <script src="<%=assetsLocation%>/js/activity-log.js"></script>
+            <% include ../layout/footer %>

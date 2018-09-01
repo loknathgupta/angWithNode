@@ -7,13 +7,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { HeroService } from './hero.service';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormTestComponent } from './form-test/form-test.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { HeroService } from './hero.service';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 const appRoutes: Routes = [

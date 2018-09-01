@@ -1,0 +1,67 @@
+   
+        <div class="modal-header">
+                <h4 class="modal-title">
+                Slab Price
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                    <% var i = 0; priceSlabDetail.forEach(function(row){ %>
+                            
+                            <div class="row " >
+                                    <div class="col-md-1">&nbsp;
+                                        </div>
+                    <div class="col-md-3">
+                            <div class="form-group">
+                                <% if(i ==0){ %>
+                                <label>Volume From</label>
+                                <% } %>
+                                <input type="text" name="volume_from" id="volume-from"  readonly
+                                    value="<%= (id!='0' ?row.volume_from:'') %>" class="form-control "
+                                    maxlength="200" required>
+                            </div>
+                        </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                                <% if(i ==0){ %>
+                            <label>Volume To</label>
+                            <% } %>
+                            
+                                <input type="text"  id='volume-to' name="volume_to" readonly class="form-control " maxlength="50" value="<%= (id!='0' ?row.volume_to:'') %>">
+                                
+                            
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                                <% if(i ==0){ %>
+                            <label>Price (<%= (id!='0' ?row.currency:'') %>)</label>
+                            <% } %>
+                            <input type="text"  id='price' name="price" readonly class="form-control " maxlength="50" value="<%= (id!='0' ?row.price:'') %>">
+                        </div>
+                    </div>
+                    <div class="col-md-2">&nbsp;
+                                        </div>
+                                       
+</div>
+<% i++; });%>
+                   
+
+                </div>
+
+
+           
+           
+<script>
+
+    $('.invoice-date-class').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true
+
+
+    });
+   
+      
+</script>

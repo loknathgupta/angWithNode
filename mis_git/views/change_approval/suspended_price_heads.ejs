@@ -1,0 +1,118 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        
+            <div class="modal-header">
+                <h4 class="modal-title">Activate Suspended Price Heads</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="filter">
+                    <div class=" left filter">
+                        <label >Client: </label>
+                        <span id="filterByClient"></span>
+                    </div>
+                    <div class=" left filter">
+                        <label >PM: </label>
+                        <span id="filterByPM"></span>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <form id="suspendedFrom">
+                    <div class="form-group">
+
+                        <table id="suspendedTable" class="table table-striped table-hover table-bordered display dataTable no-footer">
+                            <thead>
+                                <tr role="row">
+                                    <th></th>
+                                    <th width="35%">Client Name</th>
+                                    <th width="35%">Pricing Head</th>
+                                    <th>U/M</th>
+                                    <th width="15%">PM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    if(suspendedPriceHeads.length > 0){
+                                    suspendedPriceHeads.forEach(function(priceHead){ %>
+                                    <tr>
+                                        <td><input type="checkbox" name="price_master" value="<%= priceHead.id%>" ></td>
+                                        <td>
+                                            <%= priceHead.client_name %>
+                                        </td>
+                                        <td>
+                                            <%= priceHead.invoice_item %>
+                                        </td>
+                                        <td>
+                                            <%= priceHead.price_unit %>
+                                        </td>
+                                        <td>
+                                            <%= priceHead.pm_name %>
+                                        </td>
+
+                                    </tr>
+                                    <% }); 
+                                    }else{%>
+                                        <tr>
+                                            <td colspan="5">No suspended price head found.</td>
+                                        </tr>
+                                        <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-right">                    
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-success" id="activateNow">Activate</button>
+                </div>
+            </div>
+
+    </div>
+</div>
+<script>
+    $(function(){
+        if ($('#suspendedTable').length > 0) {
+            $('#suspendedTable').DataTable({
+                paging:   false,
+                ordering: false,
+                info:     false,
+                sDom: '',
+                initComplete: function () {
+                    createDropdown(this);
+                }                
+            });
+        }
+    });
+    function createDropdown(dataTable) {
+    dataTable.api().columns().every(function (i) {
+        var column = this;
+        var colId = '';
+        if (i == 1) {
+            colId = 'filterByClient';
+        }
+        if (i == 4) {
+            colId = 'filterByPM';
+        }
+        if (colId != '') {
+            var select = $('<select class="" id="' + colId + '-id"><option value="">All</option></select>')
+                .appendTo($("#" + colId).empty())
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
+                    column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                });
+
+            column.data().unique().sort().each(function (d, j) {
+                var sel = '';             
+                select.append('<option value="' + d + '" ' + sel + ' >' + d + '</option>')
+            });
+        }
+    });
+}
+    
+</script>

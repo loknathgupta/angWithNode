@@ -1,0 +1,83 @@
+<div class="modal-header">      
+    <h4 class="modal-title">Projected Volumes</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+</div>
+        
+<div class="modal-body" id="monthly_projected_volumes">
+        <!-- <header class="panel-heading">
+            Projected Volumes
+            <button type="button" class="close pull-right close-model" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+        </header> -->
+            <table width="100%" cellpadding="10" cellspacing="10">                                
+                <tr>
+                    <td>Pricing Head</td>
+                    <td colspan="3">
+                        <%= priceItemDetails.invoice_item %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Unit of Measurement</td>
+                    <td colspan="3">
+                        <%= priceItemDetails.price_unit%>
+                    </td>
+                </tr>
+                <%
+                let currentDate = new Date();
+                let currentMonth = currentDate.getMonth();
+                let currentYear = currentDate.getFullYear();
+                let startMonth = currentDate.getMonth() - 3;  
+                var i=0;
+                while(i != 9){
+                    let monthVolume = addedOn = addedBy = '';
+                    let monthToUse = startMonth + i;
+                    let actualMonth = (monthToUse + 1).toString();
+                    let indexToUse = monthsHavingVolumes.indexOf(actualMonth);
+                    if(indexToUse != -1){
+                        monthVolume = monthVolumes[indexToUse];
+                        addedOn = monthVolumeAddedDate[indexToUse];
+                        addedBy = monthVolumeAddedBy[indexToUse];
+                    }
+                    let monthName = moment(new Date(currentYear, monthToUse, 1)).format('MMMM');
+                %>
+                <tr>
+                    <td width="25%">
+                        <%= monthName %> 
+                    </td>
+                    <td width="25%">
+                        <% if(monthVolume && (monthToUse <= currentMonth)) {%>
+                            <%= monthVolume %>
+                        <% }else{ 
+                         let classToAdd = '';
+                         if((monthToUse == currentMonth)){
+                            classToAdd = 'validate[required,custom[number]]';
+                         }else{
+                            classToAdd = 'validate[custom[number]]';
+                         }   
+                        %>
+                                    <input type="text" name="<%= actualMonth %>" value="<%= (monthVolume?parseFloat(monthVolume).toFixed(2):'');%>" class="updatedVolume <%= classToAdd%>" >
+                        <% } %>
+                    </td>
+                    <td>
+                        <%  if(monthVolume) { %>
+                        Added By : <%= addedBy%>
+                        <% } %>
+                    </td>
+                    <td>
+                        <%  if(monthVolume) { %>
+                            Added On : <%= moment(addedOn).format('DD-MM-YYYY')%> 
+                        <% } %>
+                    </td>
+                    
+                </tr>
+                <% i++; } %>
+            </table>
+        
+</div>
+<div class="modal-footer">
+        <div class="pull-right" >
+            <button id="close_add_job" type="reset" class="btn btn-sm btn-danger" >Reset</button>
+            <button type="button" class="btn btn-sm btn-success" id="updateNow">Save</button>
+        </div>
+</div>

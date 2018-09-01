@@ -1,0 +1,108 @@
+<% include ../layout/header %>
+
+    <!--Left Side Starts-->
+    <div class="fix-left-side left-side-menu">
+        <!--Logo Area Starts-->
+        <% include ../layout/logo-section %>
+            <!--Logo Area Ends-->
+            <!--Left side Menu Starts-->
+            <% include ../layout/left-menu %>
+                <!--Left Menu Ends-->
+    </div>
+    <!--Left Side Ends-->
+    
+
+            <!--Header Right Menu starts-->
+            <% include ../layout/header-right-menu %>
+                <!--Header Right Menu Ends-->
+
+        </div>
+        <!--Right Side Header Ends-->
+
+        <!--Content Wrapper Starts-->
+        <div class="content-wrapper">
+            <!-- Drag and Drog Functionality Div Starts-->
+            <div class="sortable">
+                <div class="col-md-12">
+                    <!--editable starts-->
+                    <div class="panel">
+                        <div class="panel-heading"> 
+                            List Users 
+                            <div class="add-new pull-right">
+                                <button id="add-user-row" class="btn btn-success pull-right"> Add User
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <div class="clearfix add-new pull-right" id="dataTableButtons"></div>
+                                <a href="/user/syncClient" ><button id="export-client" class="btn btn-success pull-right">Import Clients From MIS <i class="fa fa-refresh"></i>
+                                    </button></a>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-body no-padding-top">    
+                                <div class="alert alert-success fade in <%=(messages.info?'':'hidden')%>">
+                                        <a href="#" class="close alert-close" >&times;</a>
+                                        <strong>Success!</strong> <span id="msg-div"><%=messages.info%></span>
+                                       
+                                    </div>                        
+                            <div id="messageBox" tabindex='1' style="display:none;"></div>
+                            <br>
+                            <div class="col-md-3 no-padding">
+                                <label>Role : </label>
+                                <span id="byRole"></span>
+                            </div>
+                            <div class="col-md-3 no-padding">
+                                <label>Status : </label>
+                                <span id="byStatus"></span>
+                            </div>
+                            <table class="table table-striped table-hover table-bordered display dataTable no-footer" id="user-table" role="grid" aria-describedby="editable-table_info">
+                                <thead>
+                                    <tr role="row">    
+                                        <th>Id</th>
+                                        <th width= "5">#</th>                                   
+                                        <th width= "20" class="sorting_asc fixwidth" tabindex="0" aria-controls="editable-table" nowrap>First Name</th>
+                                        <!-- <th  class="sorting" tabindex="0" aria-controls="editable-table">Middle Name</th> -->
+                                        <th width= "15" class="sorting fixwidth" tabindex="0" aria-controls="editable-table" nowrap>Last Name</th>
+                                        <th width= "15" class="sorting" tabindex="0" aria-controls="editable-table">Email</th>
+                                        <th width= "15" class="sorting" tabindex="0" aria-controls="editable-table">Emp. Code</th>
+                                        <th width="15" class="sorting fixwidth" tabindex="0" aria-controls="editable-table">Role</th>
+                                        <th width="20" class="sorting fixwidth" tabindex="0" aria-controls="editable-table">Reporing Manager</th>
+                                        <th width="10" class="sorting" tabindex="0" aria-controls="editable-table">Status</th>
+                                        <!-- <th class="sorting" tabindex="0" aria-controls="editable-table">Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>                                        
+                                        
+                                    <%
+                                         let i = 1;
+                                         userList.forEach(function(userList){
+                                    %>
+                                    <tr class="odd" role="row">       
+                                        <td><%= userList.id %></td> 
+                                        <td class="sorting_1"><%= i++ %></td>                               
+                                        <td><%= userList.first_name %></td>
+                                        <td><%= userList.last_name %></td>
+                                        <td><%= userList.email %></td>
+                                        <td><%= userList.employee_code %></td>
+                                        <td class="user_role" role-id="<%= userList.user_role_id %>"><%= userList.name.replace(/,/g, ", "); %></td>                                        
+                                        <td id="<%= userList.reporting_manager_id %>" class="reportingManager"><%= userList.reporting_manager %></td>
+                                        <td class="user_status" status="<%= userList.status%>"> <%= configuration.UserStatus[userList.status] %></td>                                                                  
+                                    </tr>
+                                    <% 
+                                        });
+                                    %>                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Editable Table Ends-->
+
+            </div>
+        </div>
+        <!-- Drag and Drog Functionality Div Starts-->
+    </div>
+    <!--Content Wrapper Ends-->
+    <% include ../layout/footer %>
+    <script src="<%=assetsLocation%>/js/jquery.tabledit.js"></script>
+    <script src="<%=assetsLocation%>/js/user.js"></script>

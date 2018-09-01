@@ -1,0 +1,537 @@
+.chart{position:relative;}
+.btn-gray{background:#E3E4E8; color:#858582}
+.profile 
+{
+    width:400px;
+    display: inline-block;
+}
+
+.divider 
+{
+    border-top:1px solid rgba(0,0,0,0.1);
+}
+.emphasis 
+{
+    border-top: 4px solid transparent;
+}
+.emphasis:hover 
+{
+    border-top: 4px solid #1abc9c;
+}
+.emphasis h2
+{
+    margin-bottom:0;
+}
+span.tags 
+{
+    background: #1abc9c;
+    border-radius: 2px;
+    color: #f5f5f5;
+    font-weight: bold;
+    padding: 2px 4px;
+}
+/* .dropdown-menu 
+{
+
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 250px;
+    
+    
+    left: auto;
+    ;
+} */
+.dropdown-menu .divider 
+{
+    background:none;    
+}
+
+.dropup .dropdown-menu 
+{
+    margin-bottom:10px;
+}
+.dropup .dropdown-menu:before 
+{
+    content: "";
+    border-top: 10px solid #34495e;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    z-index: 10;
+}
+.toppad
+{margin-top:20px;
+}
+
+.check-list-item{list-style-type:none;}
+.check-list-item  label {
+
+    font-weight: 300;
+}
+.aui-list-section li{padding-right:10px;}
+.social{margin:auto;}
+.hide{display:none;}
+.star:hover{background:url('images/star.png');height:14px;}
+i {color:#bfbdb3;padding-right:10px;}
+h4 {font-weight:600;color:#000;}
+a:hover {text-decoration:none;}
+
+/******************** CARD CSS *******************/
+.card{box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 0px;
+
+}
+.card:hover {box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+.card-block {padding:15px;}
+.card-img {border-radius: 0px 0px 0 0;max-height:250px;overflow: hidden;}
+/****************  BORDER ***********/
+.out-border {border:1px solid #e2e2e2;border-radius:10px 10px;}
+
+.icon{font-size:40px;color:red;}
+
+.last-login{position: absolute;
+            bottom :0px;
+            background: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            z-index: 200;
+
+            right: 0;}
+.form-group.filter{
+    padding-bottom:  5px;
+    padding-right:  5px;
+}
+.action-icon {display: none;}
+.posted-comments { height: 350px; overflow-y: auto; overflow-x: hidden;}
+.comment:hover .action-icon{display: block;}
+.action-icon span{cursor: pointer}
+.padding-left-none{padding-left: 0px;}
+.padding-right-none{padding-right: 0px;}
+.input-daterange{width: 258px; margin-bottom: 10px;}
+.input-daterange .form-control {width: 115px;}
+.date_range_filter{ padding: 0 5px;}
+.selected-date-range{width: 270px;}
+.dataTables_empty{
+    text-align: center;
+    color: #a94442;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+    padding: 15px !important;
+    margin-bottom: 20px;
+    border: 1px solid transparent !important;
+    border-radius: 4px;
+}
+#addNewJob .well{
+    float: left;
+}
+#added_files{
+    padding: 5px;
+    float: left;
+    margin-top: 20px;
+}
+#mtdOriginalFile{
+    width: 100%;
+    border: none;
+    background: no-repeat;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.glyphicon-download, glyphicon-upload{
+    color: #479caf;
+    font-size: 14px;
+}
+.glyphicon-trash{
+    color: red;
+    /* font-size: 12px; */
+}
+#popupModelMTDVol .modal-dialog{
+    width: 400px !important;
+}
+.removeIt {
+    width: auto;
+    border: 1px solid lightslategrey;
+    float: left;
+    padding: 5px;
+    margin: 0 5px 5px;
+
+
+}
+.action{
+    width: 90px;
+}
+.action .btn{
+    padding: 5px;
+    margin: 2px 0;
+}
+table.dataTable thead th{
+    vertical-align: middle !important;
+}
+
+
+table.dataTable thead th, table.dataTable thead td{
+     padding: 5px !important; 
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0px !important; 
+}
+
+.strike{
+    text-decoration: line-through;
+}
+.volume .underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.last_volumes{
+    width: 50px;
+}
+.add_custom i {
+    padding-right: 3px;
+}
+.last-description{
+    width: 120px;
+}
+.modal-header .close {
+    margin-top: -25px !important;
+}
+.modal-header h4 {
+    color:#fff;
+}
+tfoot {
+    display: table-header-group;
+}
+
+.ui-autocomplete-loading {
+    background: white url("../images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  .ui-autocomplete {
+      background: #fff;
+      border: 1px solid #bfbdb3;
+  
+  }
+  #popupModel td, #addCutom td, #popupModelForCustomprice td{
+      padding:5px;
+  }
+  .projected-volume a{
+      color: mediumblue;
+  }
+.close {
+    color: red;
+    opacity: 1;
+}
+#addCutom input, #addCutom textarea, #popupModelForCustomprice input, #popupModelForCustomprice textarea{
+    width: 300px;
+} 
+#monthly_projected_volumes  input, #monthly_projected_volumes textarea{
+    width: 80px;
+}
+tr.selected td{
+ background-color:#e4ecef !important
+} 
+.modal-header {
+    padding: 6px 10px;
+}
+.modal-footer{
+    padding: 10px;
+}
+.price-log {
+    width:675px;
+    max-height: 150px;
+    text-align: left;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+.price-log li {
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-width: 0px 1px 1px 1px;
+}
+.price-log li div{
+    float: left;     
+    overflow: hidden;
+}
+
+.price-log li.bold {
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+    background: #cddbe0 none repeat scroll 0 0 !important;
+}
+#price-slab-modal {
+    z-index: 1100;
+    top: 20%;
+    left: 20%;
+}
+.price-log li div.pm{
+    width: 20%;
+}
+.price-log li div.um, .price-log li div.status{
+    width: 15%;
+}
+.price-log li div.status.Suspended{
+    color: red;
+    cursor: pointer;
+}
+
+.price-log li div.ptype{
+    width: 15%; 
+}
+.price-log li .name{
+    width: 35%;
+}
+
+.approve {
+    margin-right: 3px;
+}
+
+.filter-form select{
+    width:140px !important;
+}
+input, textarea, select {
+    position: relative;
+}
+.btn{
+    font-size: 12px !important;
+    border-radius: 2px;    
+    padding: 2px 5px !important;
+    margin: 0 2px;
+}
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer{
+    border-bottom: 1px solid #ddd !important;
+}
+table.dataTable tbody th, table.dataTable tbody td{
+    padding: 2px 3px !important;
+}
+
+.form-control,select.input-sm{
+    height: 24px; 
+    padding: 0px;
+    border-radius: 2px;
+    font-size: 11px; 
+}
+.form-control, input {
+    padding-left:2px;
+}
+textarea {
+    padding-left:2px;
+    min-height: 24px;
+}
+.pagination > li > a, .pagination > li > span{
+    padding: 3px 8px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:active, .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button{
+    border-width: 0px;
+    background: none !important;
+    border: none !important;
+}
+
+.col-md-12, .col-md-2{
+    padding: 0px;
+}
+.col-md-4{
+    padding: 5px;
+}
+#also_used_for_update{
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+#saveDeliverables {
+    margin-right: 106px;
+    width: 150px;
+}
+.btn-success{
+    background-color: #479caf;
+    border-color: #479caf;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success{
+    background-color: #496976;
+    border-color: #496976;
+}
+.input-group-addon{
+    padding: 3px 8px;
+    font-size: 11px;
+}
+.volume, .description, .mtdVol{
+    background: #cddbe0 !important;
+    font-weight: 400;
+}
+.dropdown-menu{
+    font-size: 11px;
+}
+.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active:hover.disabled, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled:hover.disabled, .datepicker table tr td.active[disabled], .datepicker table tr td.active:hover[disabled], .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active.disabled:hover[disabled]{
+    background-color: #479caf !important;
+    background-image: none;
+}
+.pagination{
+    margin: 5px 0;
+}
+
+.bottom {
+    width: 100%;
+    float: left;
+    padding-top: 10px;
+}
+.dataTables_wrapper .dataTables_info{
+    padding-top: 13px !important;
+}
+.dataTable thead tr, .dataTable thead tr td{
+    background: #cddbe0 !important;
+}
+.content-wrapper{
+    background: #fff;
+    padding: 10px 0;
+    min-height: 600px;
+}
+.message{
+    padding: 0 15px;
+}
+.action_btn {
+    width:65px !important;
+}
+.no-padding-top{padding-top:0px;}
+#login-panel{ margin:26% 0;}
+#forgot-panel{ margin:32% 0;}
+#add_price .row{
+    padding: 0 5px;
+}
+#updateProfile .control-label{
+    width: 85px;
+    float: left;    
+}
+#updatePassword  .control-label{
+    width: 95px;
+    float: left;    
+}
+.information-menu .dropdown-menu li a{
+    background: none !important;
+}
+#addprice .modal-dialog{
+    width:750px !important;
+}
+#status-div-id, #custom-div-id, #price-unit-div-id, #approved-div-id, #filterByClientStatus-id, #filterByAO-id{
+    width:80px !important;
+}
+.padding-zero{
+    padding: 0px !important;
+}
+.total-ammount{
+    width:300px;
+}
+.total-ammount-summary{
+    width:500px;
+}
+.save-button{
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.combobox-container .dropdown-toggle {
+    display: none;
+}
+.combobox-container input.form-control{
+    width: 155px;
+}
+.short-input-box{
+    width:100px !important;
+}
+.save-invoice {
+   
+    width: 150px;
+}
+.draging td{
+    background-color: #cddbe0 !important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+    color: #428bca;
+}
+#am-table_filter{
+ margin-top:8px;
+}
+.limited{
+    white-space: nowrap;
+    max-width: 120px;                  
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.left-nav-item.nav-active>a, .left-nav-item.nav-active>a:hover{
+    background-color: #fff;
+    font-size: 12px;
+    color: #000;
+    cursor: auto;
+    font-weight: bold;
+}
+.left-nav-item.nav-active ul li {
+    background-color: #e0f3ff !important;
+}
+
+.filter {
+    float: left;
+    margin-right: 15px;
+}
+.filter select, #delivery_for{
+    width: 100px;
+}
+.form-group.required .control-label:after { 
+    content:"*";
+    color:red;
+ }
+ #slabs{
+     float: left;
+     width: 100%;    
+     padding: 0;
+ }
+ #slabs li {
+     list-style-type: none;
+     float: left;
+     width: 100%;
+ }
+ #slabs li>div {
+     float: left;
+     width: 150px;
+     padding: 5px 10px 0 0;
+ }
+ .fixed-rate{
+    width: 75px; float: right;
+ }
+ .priceType {
+    width: 75px; float: left;
+ }
+ .showSlabs{
+    padding: 25px 0 0 85px;
+ }
+ #addprice .modal-dialog .modal-dialog{
+     width: 500px;
+     margin: 0px auto;
+ }
+ #addprice .modal-dialog .modal-dialog{
+     width: 500px !important;
+     border: 1px solid #000;
+ }
+
+ #price-slab{
+    width: 400px !important;
+    border: 1px solid #000;
+ }
+select[multiple], select[size] {
+    height: 100px;
+    width: 90% !important;
+}
+.fixwidth{
+    width: 125px !important;
+}
+table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
+.text-align-right{
+    text-align: right !important;
+}
+.fa.fa-bars{display: none;}
+table.fixedHeader-floating{position:fixed !important;background-color:white}table.fixedHeader-floating.no-footer{border-bottom-width:0}table.fixedHeader-locked{position:absolute !important;background-color:white}@media print{table.fixedHeader-floating{display:none}}
+

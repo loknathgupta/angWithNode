@@ -1,0 +1,111 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Custom Price</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+</div>
+
+<div class="modal-body">
+    <input name="price_master_id" type="hidden" class="hidden" value="<%= priceItemDetails.price_master_id %>">
+    <table width="100%" cellpadding="10" cellspacing="10">
+        <tr>
+            <td>Client</td>
+            <td>
+                <%= priceItemDetails.client_name %>
+                    <input name="i_clientid" type="hidden" class="hidden" value="<%= priceItemDetails.client_id %>">
+                    <input name="i_empid" type="hidden" class="hidden" value="<%= priceItemDetails.i_empid %>">
+                    <input name="account_manager_id" type="hidden" class="hidden" value="<%= priceItemDetails.account_manager_id %>">
+                    <input name="ao_id" type="hidden" class="hidden" value="<%= priceItemDetails.ao_id %>">
+            </td>
+        </tr>
+        <tr>
+            <td>Pricing Head</td>
+            <td>
+                <input name="invoice_item" type="text" class="validate[required]">
+            </td>
+        </tr>
+        <tr>
+            <td>Unit of Measurement</td>
+            <td>
+                <input name="price_unit" id="priceUnit" type="text" class="validate[required]">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Currency</td>
+            <td>
+                <%= priceItemDetails.currency %>
+                    <input name="currency" type="hidden" class="hidden" value="<%= priceItemDetails.currency %>">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td>
+                <input name="price_per_unit" type="text" class="validate[required,custom[number]]">
+            </td>
+        </tr>
+        <tr>
+            <td>Volume</td>
+            <td>
+                <input name="volume" type="text" class="validate[required,custom[number]]">
+            </td>
+        </tr>
+        <tr>
+            <td>Requested</td>
+            <td>
+                    <div class='input-group date' id='requested-date'>
+                            <input name="requested" type="text" class="pull-left validate[required]">
+                            <span class="input-group-addon pull-left">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>Comment</td>
+            <td>
+                <textarea name="description" rows="1"></textarea>
+                <!-- <input name="description"  type="text" class=""> -->
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+        <button type="button" class="btn btn-sm btn-success" id="addCustomPrice">Save</button>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#priceUnit").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/price/getPriceUnit",
+                    dataType: "jsonp",
+                    type: "post",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.price_unit,//text comes from a collection of mongo
+                                value: item.price_unit
+                            };
+                        }));
+
+                    }
+                });
+            },
+            minLength: 2
+
+        });
+        $('#requested-date').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true
+
+
+    });
+    });
+</script>

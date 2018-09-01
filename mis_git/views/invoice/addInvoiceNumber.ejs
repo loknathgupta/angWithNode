@@ -1,0 +1,126 @@
+<form id="add_number" method="POST" action="/price/add">
+
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <%=(id!='0'?'Edit':'Add')%> Invoice Number
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+
+    <div class="modal-body">
+
+        <% if(Object.keys(invoiceDetail).length==0){
+                                invoiceDetail=[{id:0,invoice_number:'',invoice_date:'',full_partial:''}];
+                            }
+                            if(addNew == 1){
+                                invoiceDetail=[{id:0,invoice_number:'',invoice_date:'',full_partial:'', 'v_company':invoiceDetail[0]['v_company'], 'invoice_type':invoiceDetail[0]['invoice_type']}];
+                                //invoiceDetail[] = invoiceDetail[0];
+                            }
+                            if(id!='0'){
+                                %>
+            <input type="hidden" value="edit" id="action-type" name="action_type">
+            <input type="hidden" value="<%=id%>" id="price-id" name="price_id">
+            <% }
+            let cnt = 0;
+                                invoiceDetail.forEach(function(row){
+                
+                                if(id!='0'){
+                                    %>
+                <input type="hidden" value="<%=row.id%>" id="invoice-id" name="id">
+                <%
+                                }
+                                if(cnt > 0){
+                            %>
+                            <hr>
+                            <% } %> 
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Client</label>
+                                <div>
+                                    <%= row.v_company %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Invoice Number</label>
+
+                                <input type="text" name="invoice_number" id="invoice-number" value="<%= (id!='0' ?row.invoice_number:'') %>" class="form-control validate[required]"
+                                    maxlength="200" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Invoice Date</label>
+
+                                <div class='input-group date invoice-date-class' id='invoice-date'>
+                                    <input type="text" id='invoice-date-value' name="invoice_date" readonly class="form-control validate[required]" maxlength="50"
+                                        required value="<%= ((id!='0' && row.invoice_date) ?moment(row.invoice_date).format( 'DD-MM-YYYY') :'' ) %>">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Full/Partial</label>
+
+                                <select name="full_partial" id="invoice-full-partial" class="form-control validate[required]">
+                                    <option value="">Select Full/Partial</option>
+
+                                    <% for(var key in configuration.FullPartial){%>
+                                        <option value="<%=key%>" <%=( id!='0' && row.full_partial==key ? 'Selected': '') %>>
+                                            <%=configuration.FullPartial[key]%>
+                                        </option>
+
+                                        <% }; %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Invoice Type</label>
+                                <div>
+                                    <%=configuration.InvoiceType[row.invoice_type]%>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% if(id =='0'){ %>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <div id="tAmt">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% cnt++; }); %>
+
+    </div>
+
+
+
+    <div class="modal-footer">
+
+
+        <input type="button" class="btn btn-success" id="save-invoice-number" value="Save">
+    </div>
+</form>
+<script>
+
+    $('.invoice-date-class').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true
+
+
+    });
+
+
+</script>

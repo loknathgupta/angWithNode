@@ -1,0 +1,478 @@
+<form id="add_price" method="POST" action="/price/add">
+    <% if(typeof id !=='undefined'){ %>
+        <input type="hidden" value="<%= (typeof id !=='undefined' ?id:'') %>" name="id" id="edit-id">
+        <% } %>
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <%= (typeof id !=='undefined' ?'Edit Price':'Add Price') %>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class='control-label'>Client</label>
+                            
+                                    <select name="i_clientid" id="client-id" class="client-id form-control validate[required]" <%=( typeof id !=='undefined' ? 'disabled': '') %> >
+                                        <option value="">Select Client</option>
+                                        <% clientList.forEach(function(row){  %>
+                                            <option value="<%= row.i_clientid %>" <%=( typeof id !=='undefined' && row.i_clientid==priceDetail[0].i_clientid?
+                                                'selected ': '') %>><%= row.v_company %></option>
+                                            <% }); %>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class='control-label'>Project Manager</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="old_pm" value="<%=priceDetail[0].pm_name%>">
+                                <input type="hidden" name="new_pm" id="new-pm">
+                                <% } %>
+                                    <select name="i_empid" class="form-control validate[required]" id="pm-id">
+                                        <option value="">Select Project Manager</option>
+                                        <% employeeList.forEach(function(row){ %>
+                                            <option value="<%= row.id %>" <%=( typeof id !=='undefined' && row.id==priceDetail[0].i_empid? 'selected': '')
+                                                %>>
+                                                <%= row.pm_name %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="control-label">Account Manager</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="old_am" value="<%=priceDetail[0].am_name%>">
+                                <input type="hidden" name="new_am" id="new-am">
+                                <% } %>
+                                    <select name="account_manager_id" class="form-control " id="account-manager-id">
+                                        <option value="">Select Account Manager</option>
+                                        <% amList.forEach(function(row){ %>
+                                            <option value="<%= row.id %>" <%=( typeof id !=='undefined' && row.id==priceDetail[0].account_manager_id?
+                                                'selected': '') %>>
+                                                <%= row.am_name %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                            <div class="form-group required">
+                                <label class="control-label">Account Owner</label>
+                                <% if(typeof id !=='undefined'){ %>
+                                    <input type="hidden" name="old_ao" value="<%=priceDetail[0].ao_name%>">
+                                    <input type="hidden" name="new_ao" id="new-ao">
+                                    <% } %>
+                                        <select name="ao_id" class="form-control validate[required]" id="ao-id">
+                                            <option value="">Select Account Owner</option>
+                                            <% aoList.forEach(function(row){ %>
+                                                <option value="<%= row.id %>" <%=( typeof id !=='undefined' && row.id==priceDetail[0].ao_id?
+                                                    'selected': '') %>>
+                                                    <%= row.ao_name %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                            </div>
+                        </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class="control-label">Pricing Head</label>
+                            <input type="text" name="invoice_item" value="<%= (typeof id !=='undefined' ?priceDetail[0].invoice_item:'') %>" <%=( typeof
+                                id !=='undefined' ? 'readonly': '') %> class="form-control validate[required]" maxlength ="200" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                             <label class="control-label">Unit of Measurement</label>
+                            <input type="text" name="price_unit" id="price-unit" value="<%= (typeof id !=='undefined' ?priceDetail[0].price_unit:'') %>"
+                                <%=( typeof id !=='undefined' ? 'readonly': '') %> class="form-control validate[required]" maxlength ="200" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3 right">
+                        <div class="form-group <% if(typeof id !=='undefined'){ %> priceType <% } %>">
+                            <label class="control-label">Price Type</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="price_type_old" id="priceTypeOld"  value="<%=priceDetail[0].price_type%>">
+                            <% } %>
+                            <select name="price_type" id="priceType" class="form-control validate[required]">
+                                <option value="">Select</option>
+                                <% 
+                                let selected;
+                                for (key in configuration.PriceType) { 
+                                    selected = '';
+                                     if(typeof id !=='undefined' && priceDetail[0].price_type == key){ 
+                                        selected = "selected";
+                                     }
+                                %>
+                                    <option value="<%= key %>" <%= selected %> > <%=configuration.PriceType[key] %></option>
+                                <% } %>
+                            </select>
+                            
+                            <div class="modal" id="slabModal" data-backdrop="static" >
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Price Slabs</h4>
+                                        <button type="button" class="close" id='closeSlabModel' aria-hidden="true">×</button>
+                                    </div><div class="container"></div>
+                                    
+                                    <div class="modal-body">
+                                        <ul id="slabs">
+                                            <li class="heading">
+                                                <div>Volume From</div>
+                                                <div>Volume To</div>
+                                                <div id="p_currency">Price </div>
+                                            </li>
+                                            <% 
+                                            let initialFrom;
+                                            let defaultSlabCount = 5;
+                                            if(typeof PricingSlabs !=='undefined' ){
+                                                if(typeof id !=='undefined' && PricingSlabs.vprice.length > 5){
+                                                    defaultSlabCount = PricingSlabs.vprice.length;
+                                                }
+                                            }
+                                            let volumeFrom, volumeTo, volumePrice;
+                                            for(var i= 1; defaultSlabCount >= i; i++) { 
+                                                volumeFrom = volumeTo = volumePrice = '';
+                                                indexToUse = i-1;
+                                                if(typeof id !=='undefined' && PricingSlabs){
+                                                    if(PricingSlabs.vfrom[indexToUse]){
+                                                        volumeFrom = PricingSlabs.vfrom[indexToUse];
+                                                    }
+                                                    if(PricingSlabs.vto[indexToUse]){
+                                                        volumeTo = PricingSlabs.vto[indexToUse];
+                                                    }
+                                                    if(PricingSlabs.vprice[indexToUse]){
+                                                        volumePrice = PricingSlabs.vprice[indexToUse];
+                                                    }
+                                                }
+                                                if(i==1){
+                                                    volumeFrom = 1;
+                                                }
+                                            %>
+                                            <li class="slab-data" id="slab_<%= i%>">
+                                                <div><input type="text" name="vfrom" value="<%= volumeFrom%>" class="VolumeFrom" readonly></div>
+                                                <div><input type="text" name="vto" value="<%= volumeTo%>" old-data ="<%= volumeTo%>" class="VolumeTo validate[custom[integer]]"></div>
+                                                <div class=""><input type="text" name="vprice" value="<%= volumePrice%>" old-data="<%= volumePrice%>" class="slabPrice" id="slabPrice_<%= i%>"></div>
+                                            </li>
+                                            <% } %>                                                                                                 
+                                        </ul>
+                                        <a href="#" class="btn btn-success" id="addMoreSlab">Add More</a>
+                                        &nbsp;
+                                        <br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- <a href="#" data-dismiss="modal" class="btn btn-primary">Close</a> -->
+                                        <a href="#" class="btn btn-success" id="saveSlabs">Save</a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>                         
+                        </div>
+                        <div class="form-group showSlabs hide">
+                        <a href="javascript:void(0);" id="showSlabs">Show Slabs</a>
+                        </div>
+                        <% 
+                        let classToAdd = '';
+                        if(typeof id ==='undefined') {
+                            classToAdd = 'hide';
+                        }
+                        if(typeof id !=='undefined' && priceDetail[0].price_type == 'S'){ 
+                            classToAdd = 'hide';
+                        } 
+                        %>
+
+                        <div class="form-group required right <%= classToAdd%>  fixed-rate" >
+                            <label class="control-label">Price per Unit</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="price_per_unit_old" value="<%=priceDetail[0].price_per_unit%>">
+                            <% } %>
+                            <input type="text" name="price_per_unit" id="price-per-unit" data-price-per-unit="<%= (typeof id !=='undefined' ?priceDetail[0].price_per_unit:'') %>"
+                                value="<%= (typeof id !=='undefined' ?priceDetail[0].price_per_unit:'') %>" class="form-control validate[required]"
+                                maxlength="200" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class="control-label">Currency</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="old_currency" id="old-currency" value="<%=priceDetail[0].currency%>">
+                                <% } %>
+                                    <select name="currency" id="select-currency" class="form-control validate[required]" >
+                                        <option value=""> Select Currency </option>
+                                        <% currencyList.forEach(function(row){ %>
+                                            <option value="<%= row.value %>" <%=( (typeof id !=='undefined' && row.value==priceDetail[0].currency) || (typeof id==='undefined'
+                                                && row.value=='USD' )? 'Selected': '') %>><%= row.value %></option>
+                                            <% }); %>
+
+                                    </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                            <div class="form-group required">
+                                <label class="control-label">Effort per Unit (mins)</label>
+                                <% if(typeof id !=='undefined'){ %>
+                                    <input type="hidden" name="effort_per_unit_old" value="<%=priceDetail[0].effort_per_unit%>">
+                                <% } %>
+                                <input type="text" name="effort_per_unit"   placeholder="e.g.20m"
+                                    value="<%= (typeof id !=='undefined' ?priceDetail[0].effort_per_unit:'') %>" class="form-control validate[required,custom[integer]]"
+                                    maxlength="200" required>
+                            </div>
+                        </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class="control-label">Effective Start Date</label>
+                            <% var disabled = ''; if(typeof id !=='undefined'){ disabled = 'disabled';
+                                
+                                 } %>
+                            <div class='input-group date' id='start_date<%=disabled%>'>
+                                <input type="text"  name="start_date" readonly class="form-control validate[required]" maxlength="200" required value="<%= ((typeof id !=='undefined' ) ?moment(priceDetail[0].start_date).format( 'DD-MM-YYYY') :moment(new Date('2018-04-01')).format( 'DD-MM-YYYY') ) %>">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group required">
+                            <label class="control-label">Effective End Date</label>
+                            <% if(typeof id !=='undefined'){ %>
+                                <input type="hidden" name="end_date_old" value="<%=priceDetail[0].end_date%>">
+                            <% } %>
+                            <div class='input-group date' id='end_date'>
+                                <input type="text"  name="end_date" readonly class="form-control validate[required]" maxlength="200" required value="<%= ((typeof id !=='undefined' ) ?moment(priceDetail[0].end_date).format( 'DD-MM-YYYY') :moment(new Date(new Date().getFullYear()+81, 11, 31)).format( 'DD-MM-YYYY')) %>">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <% if(typeof id !=='undefined' ) {
+                        let actualStartDate = new Date(priceDetail[0].start_date);  
+                        actualStartDate.setDate(actualStartDate.getDate()+1); 
+                    %>
+                        <div class="col-md-3">
+                            <div class="form-group required">
+                                <label>New Effective Date</label>
+                                <div class='input-group date' id='new_start_date' data-start-val ="<%= moment(actualStartDate).format('DD-MM-YYYY')%>">
+                                    <input type="text" name="new_start_date" id="new-start-date" readonly class="form-control " maxlength="200">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } %>
+                            
+                            <div class="col-md-3">
+                                <div class="form-group required">
+                                    <label class="control-label">Billing Cycle</label>
+                                    <select name="billing_cycle" id="billing-cycle-id" class="form-control validate[required]">
+                                        <option value="">Select Billing Cycle</option>
+                                        <% billingCycleList.forEach(function(row){ %>
+                                            <option value="<%= row.id %>" <%=( typeof id !=='undefined' && row.id==priceDetail[0].billing_cycle? 'selected': '') %> >
+                                                <%= row.value %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group billing-day <%=(typeof id !=='undefined' && priceDetail[0].billing_cycle ==6?'':'hidden')%>" id="custom-day-div">
+                                    <label>Custom Billing Date</label>
+                                    <select name="billing_day" class="form-control " id="billing-day">
+                                        <option value=""> Select Billing Date </option>
+                                        <% for(var i=1;i<=31;i++){ %>
+                                            <option value="<%= i %>" <%=( typeof id !=='undefined' && i==priceDetail[0].billing_day ? 'Selected': '') %>>
+                                                <%= i %>
+                                            </option>
+                                            <% } %>
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group required">
+                                    <label class="control-label">Credit Period</label>
+                                    <select name="credit_period" class="form-control validate[required]">
+                                        <option value="">Select Credit Period</option>
+                                        <% cPeriodList.forEach(function(row){ %>
+                                            <option value="<%= row.id %>" <%=( typeof id !=='undefined' && row.id==priceDetail[0].credit_period? 'selected': '') %>>
+                                                <%= row.value %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group required">
+                                    <label class='control-label'>Invoice Sent To</label>
+                                    <% if(typeof id !=='undefined'){ %>
+                                        <input type="hidden" name="invoice_to_old" value="<%=priceDetail[0].invoice_to%>">
+                                    <% } %>
+                                    <input type="text" name="invoice_to"   placeholder="Comma separated emails"
+                                        value="<%= (typeof id !=='undefined' ?priceDetail[0].invoice_to:'') %>" class="form-control validate[required] "
+                                        maxlength="1000" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Invoice Sent CC</label>
+                                    <% if(typeof id !=='undefined'){ %>
+                                        <input type="hidden" name="invoice_cc_old" value="<%=priceDetail[0].invoice_cc%>">
+                                    <% } %>
+                                    <input type="text" name="invoice_cc"   placeholder="Comma separated emails"
+                                        value="<%= (typeof id !=='undefined' ?priceDetail[0].invoice_cc:'') %>" class="form-control "
+                                        maxlength="1000" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group required">
+                                        <% if(typeof id !=='undefined'){ %>
+                                            <input type="hidden" name="invoice_type_old" value="<%=priceDetail[0].invoice_type%>">
+                                        <% } %>
+                                    <label class="control-label">Invoice Type</label>
+                                    <select name="invoice_type" class="form-control validate[required]">
+                                        <option value="">Select Invoice Type</option>
+                                        
+                                            <% for(var key in configuration.InvoiceType){%>
+                                            <option value="<%=key%>" <%= ( typeof id !=='undefined' && key==priceDetail[0].invoice_type? 'selected': '')%>><%=configuration.InvoiceType[key]%></option>
+                                           
+                                          <% }; %>  
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group required">
+                                        <% if(typeof id !=='undefined'){ %>
+                                            <input type="hidden" name="client_status_old" value="<%=priceDetail[0].client_status%>">
+                                        <% } %>
+                                    <label class="control-label">Client Status</label>
+                                    <select name="client_status" class="form-control validate[required]">
+                                        <option value="">Select Client Status</option>
+                                       
+                                            <% for(var key in configuration.ClientStatus){%>
+                                            <option value="<%=key%>" <%= ( (typeof id !=='undefined' && key==priceDetail[0].client_status) ||(typeof id ==='undefined'&&  key==1)? 'selected': '')%>><%=configuration.ClientStatus[key]%></option>
+                                           
+                                          <% }; %>  
+                                    </select>
+                                </div>
+                            </div>
+                            <% if(typeof id !=='undefined'){ %>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="hidden" name="approval_status_old" value="<%=priceDetail[0].approval_status%>">
+                                    <label class="control-label">Approved</label>
+                                    <select name="approval_status" class="form-control">
+                                        <!-- <option value="">Select Approval Status</option> -->
+                                        
+                                            <% for(var key in configuration.ApprovalStatus){%>
+                                                <option value="<%=key%>" <%= ( (typeof id !=='undefined' && key==priceDetail[0].approval_status)? 'selected': '')%>><%=configuration.ApprovalStatus[key]%></option>
+                                            <% }; %>  
+                                    </select>
+                                </div>
+                            </div>
+                            <% } %>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Comments, if any</label>
+                                    <textarea name="description" rows="1" class="form-control" id="desc-text"><%= (typeof id !=='undefined' ? priceDetail[0].description:'') %></textarea>
+                                </div>
+                            </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                
+                    <div >
+                        <div class="price-log pull-left">
+                            <ul class="list-group" id='logListing'>
+                                <% if( typeof id !=='undefined'){%>
+                                    <% if(priceLog[0][0]){%>
+                                    <li class="bold"><div class="name">Price Head Edit Log</div></li>
+                                    <% } %>
+                                    <% priceLog.forEach(function(prow){ if(prow.length>0){  %>
+                                        <% prow.forEach(function(lrow){ 
+                                            %>
+                                        <li>
+                                            <b>
+                                                <%= moment(lrow.created).format( 'DD-MM-YYYY') %>
+                                            </b> -
+                                            <%=lrow.log_text %> by <%=lrow.created_user %>
+                                        </li>
+                                    <%  }) } }); %>
+                                <% } %>
+                            </ul>
+                        </div>
+
+                    </div>
+                        
+                        <input type="button" class="btn btn-success" id="btn-add-price" value="Save">
+            </div>
+</form>
+<script>
+
+    $('#start_date, #end_date, #new_start_date').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true
+
+
+    });
+    
+    $('#end_date').datepicker('setStartDate', moment(new Date()).format( 'DD-MM-YYYY'));
+    $('#new_start_date').datepicker('setStartDate', $('#new_start_date').attr('data-start-val'));
+  
+    $("#price-unit").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/price/getPriceUnit",
+                dataType: "jsonp",
+                type: "post",
+                data: {
+                    term: request.term
+                },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.price_unit.trim(),//text comes from a collection of mongo
+                            value: item.price_unit.trim()
+                        };
+                    }));
+
+                }
+            });
+        },
+        minLength: 2
+
+    });
+    
+       $('#client-id').combobox();
+
+    $(function(){
+        $('.slab-data').each(function(){
+            console.log($(this).find('.VolumeFrom').val());
+            if($(this).find('.VolumeFrom').val() != ''){
+                $(this).find('.slabPrice').addClass('validate[required,custom[number]]');
+            }
+        });  
+        if($('#priceType').val() == 'S'){
+            $('.showSlabs').removeClass('hide');
+        }
+        if($('#edit-id').length < 1 || $('#edit-id').val() == 0) {
+            $('#priceType').val('F').trigger('change');
+        } 
+        
+    });
+      
+</script>

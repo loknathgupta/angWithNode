@@ -1,0 +1,25 @@
+<!--Right Side Starts-->
+<div class="right-wrapper">
+    <!--Right Side Header Starts-->
+    <div class="right-side-header">
+
+        <!--toggle button starts-->
+        <a class="toggle-button">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!--toggle button ends-->
+
+        
+<div class="header-right-menu">
+                        <ul class="information-menu">
+                     
+                            <li> <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 
+                                Welcome! <%= sessUserData.user_name %> <span class="caret"></span> </a>
+                                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">       
+                                    <li><a href="/user/profile/"><i class="fa fa-user"></i> Profile</a></li>                        
+                                    <li><a href="/user/change-password/"><i class="fa fa-user"></i> Change Password</a></li>                        
+                                    <li><a href="/user/logout/"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>

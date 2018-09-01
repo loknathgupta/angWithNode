@@ -1,0 +1,164 @@
+<% include ../layout/header %>
+    <!--Left Side Starts-->
+    <div class="fix-left-side left-side-menu">
+        <!--Logo Area Starts-->
+        <% include ../layout/logo-section %>
+            <!--Logo Area Ends-->
+            <!--Left side Menu Starts-->
+            <% include ../layout/left-menu %>
+                <!--Left Menu Ends-->
+    </div>
+    <!--Left Side Ends-->
+    
+
+            <!--Header Right Menu starts-->
+            <% include ../layout/header-right-menu %>
+                <!--Header Right Menu Ends-->
+
+        </div>
+        <!--Right Side Header Ends-->
+
+        <!--Content Wrapper Starts-->
+        <div class="content-wrapper">
+           
+            <!-- Drag and Drog Functionality Div Starts-->
+            <div class="sortable">
+                <div class="col-md-12">
+                    <!--editable starts-->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Price Master
+                            
+                                    
+                                <a href="javascript:void(0);" id="add-price-open" class="btn btn-success pull-right" >Add Price
+                                    <i class="fa fa-plus"></i></a>
+                                </button>
+                                
+                               
+                            
+                            
+                                <div class="clearfix add-new pull-right" id="dataTableButtons">
+                    
+                                </div>
+                                <a href="/user/syncClient" ><button id="export-client" class="btn btn-success pull-right">Import Clients From MIS <i class="fa fa-refresh"></i>
+                                </button></a>
+                                
+                        </div>
+
+                        <div class="panel-body">
+                                <div class="alert alert-danger fade in hidden">
+                                        <a href="#" class="close alert-close" >&times;</a>
+                                        <strong>Error!</strong> <span id="msg-div-error"></span>
+                                    </div>
+                                <div class="alert alert-success fade in <%=(messages.info?'':'hidden')%>">
+                                        <a href="#" class="close alert-close" >&times;</a>
+                                        <strong>Success!</strong> <span id="msg-div"><%=messages.info%></span>
+                                       
+                                    </div>
+                                    <div class="">
+                                            <% include ../elements/price-filter-fields %>
+                                        
+                            </div>
+                            <form method="POST" id="lst-frm">
+                            <div class="row">
+                                <!--<div class="col-md-4">
+                                        <div class="row">
+                                                <div class="col-md-4">
+                                    <select name="batch_action" id="batch-action-id" class="form-group">
+                                        <option value="">Select Action</option>
+                                        <option value="A">Active</option>
+                                        <option value="I">Inactive</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-md-8">
+                                            <input type="button" class="btn btn-default btn-xs"  value="Go" id="btn-go">
+                                            </div>
+                                    </div>
+                                    </div>-->
+                                    
+                            </div>
+                            
+                            <table class="table table-striped table-hover table-bordered display dataTable no-footer" id="price-table"  >
+                                
+                                    
+                                <thead>
+                                    <tr role="row">
+                                        <!--<th align="left"></th>-->
+                                        <th class="sorting_asc"  >Client</th>
+                                        <th class="limited" title="Project Manager" width="10%">PM</th>
+                                        <th class="sorting" title="Account Manager" width="10%" >AM</th>
+                                        <th class="sorting"  >Pricing Head</th>
+                                        <th class="sorting"  title="Unit of Measurement" width="5%">U/M</th>
+                                        <th class="sorting" Title="Currency" width="3%" >CCY </th>
+                                        <th class="sorting" width="5%" title=" Per Unit Price"> Price</th>
+                                        <th class="sorting"  title="Effort Per Unit">EFU </th>
+                                        <th class="sorting not-export" width="7%" >Start Date</th>
+                                        <th class="hidden "  >Start Date </th>
+                                        <th class="sorting not-export" width="7%" >End Date</th>
+                                        <th class="hidden " >End Date </th>
+                                        
+                                        <th class="sorting"  width="5%" >Billing</th>
+                                        <th class="sorting" width="3%" title="Credit Period" >CP</th>
+                                        <th class="sorting"  >Description</th>
+                                        <th class="sorting"  width="5%" title="Projected Monthly Volume">PMV</th>
+                                        <th class="sorting"  >Custom </th>
+                                        <th class="sorting"  >Status </th>
+                                        <th class="sorting not-export"  >Created </th>
+                                        <th class="hidden ">Created </th>
+                                        <th class="sorting not-export"  >Modified </th>
+                                        <th class="hidden ">modified </th>
+                                        <th class="sorting"  >Created by </th>
+                                        <th class="sorting"  title="Account Manager">AO </th>                                        
+                                        <th class="sorting"  >Client Status </th>
+                                        <th class="sorting"  >Approved</th>
+                                        <th align="left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                  
+                                                    
+                                </tbody>
+                            </table>
+</form>
+                        </div>
+                    </div>
+                </div>
+                <!--Editable Table Ends-->
+
+            </div>
+        </div>
+        <!-- Drag and Drog Functionality Div Starts-->
+    </div>
+
+    <div id="projected-volume" class="modal" role="dialog"> 
+        <div class="modal-dialog" >
+
+        <!-- Modal content-->
+        
+            <div class="modal-content" > 
+                    <form >
+                            <div id="addCutom">
+
+                            </div>
+                            
+                    </form> 
+                    
+            </div>
+        
+        </div>
+    </div>
+    <% include ../elements/slab_price %>
+    <!--Content Wrapper Ends-->
+   <script>
+  var ClientStatus = '<%- JSON.stringify(configuration.ClientStatus); %>';
+  //console.log(ClientStatus);
+  var ApprovalStatus = '<%- JSON.stringify(configuration.ApprovalStatus); %>';
+  //console.log(ApprovalStatus);
+   </script>
+    <% include ../elements/add_price %>
+   
+    <script src="<%=assetsLocation%>/js/price.js"></script>
+    <script src="<%=assetsLocation%>/js/bootstrap-combobox.js"></script>
+    <% include ../layout/footer %>
+       
