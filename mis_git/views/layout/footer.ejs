@@ -17,6 +17,7 @@
 <!--Right Side Ends-->
 </div>
 
+<% if(sessUserData) { %>
 <div id="chatListWindow">
     <div class="chat-box-header">
         <a href="javascript:void(0);" id="chat-arrow" >
@@ -25,6 +26,8 @@
         </a>
 
     </div>
+    <input type="hidden" name="userSelf" id="userSelf" data-id="<%=sessUserData.id%>" data-email="<%=sessUserData.v_email%>" data-username="<%=sessUserData.user_name%>" >
+    
     <div id="chatUsers" class="hide">
         <ul>
             <li>
@@ -34,7 +37,7 @@
 
     </div>
 </div>
-<div class="chatbox" >
+<div class="chatbox hide" >
     <div class="chatboxhead">
         <div class="chatboxtitle">Receiver</div>
         <div class="chatboxoptions">
@@ -44,10 +47,12 @@
     </div>
     <div class="chatboxcontent"></div>
     <div class="chatboxinput">
-        <textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,'246','');"></textarea>
+        <textarea class="chatboxtextarea" ></textarea>
     </div>
 </div>
 <script src="/socket.io/socket.io.js"></script>
+<script src="<%=assetsLocation%>/js/chat.js"></script>
+<% } %>
 </body>
 
 

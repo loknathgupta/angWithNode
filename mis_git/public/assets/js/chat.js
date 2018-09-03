@@ -1,5 +1,10 @@
+var socket;
+var selfUserId, userSelfName, toUserId, toUserEmail, toUserName;
 $(function(){    
-    var socket = io();
+    socket = io();
+    userSelfId = $('#userSelf').attr('data-id');
+    userSelfName = $('#userSelf').attr('data-username');
+    //alert(userSelfName);
     //LOAD ONLINE USERS ONCE****************************
     $('#chat-arrow').on('click', function(){
         if($('#chatUsers').hasClass('hide')){
@@ -11,14 +16,17 @@ $(function(){
                     onlineUserIds = [];
                     for(user of data){
                         userDetails = JSON.parse(user['data']);
+                        
                         onlineUser = userDetails.userData;
-                        userId = onlineUser.id;
-                        userEmail = onlineUser.v_email;
-                        userName = onlineUser.user_name;
-                        //onlineUserIds.push(userId);
-                        if(onlineUserIds.indexOf(userId) == -1){
-                            $('#chatUsers ul').append("<li> <a class='start_with' href='#' data-id='"+userId+"' data-email='"+userEmail+"' data-username='"+userName+"' >"+userName+"</a></li>")
-                            onlineUserIds.push(userId);
+                        if(onlineUser){
+                            userId = onlineUser.id;
+                            userEmail = onlineUser.v_email;
+                            userName = onlineUser.user_name;
+                            //onlineUserIds.push(userId);
+                            if(onlineUserIds.indexOf(userId) == -1 && userSelfId != userId){
+                                $('#chatUsers ul').append("<li> <a class='start_with' href='#' data-id='"+userId+"' data-email='"+userEmail+"' data-username='"+userName+"' >"+userName+"</a></li>")
+                                onlineUserIds.push(userId);
+                            }
                         }
                     }
                     $('#chatUsers').removeClass('hide').addClass('show');
@@ -31,51 +39,56 @@ $(function(){
     //ENDED LOSDIN USERS********************************
     var activeUserId = 0;
     $(document).on('click', '.start_with', function(){
-        userId = $(this).attr('data-id');
-        userEmail = $(this).attr('data-email');
-        userName = $(this).attr('data-username');
-        if(userId !=  activeUserId){
-            $('.chatboxtitle').html(userName);
+        toUserId = $(this).attr('data-id');
+        toUserEmail = $(this).attr('data-email');
+        toUserName = $(this).attr('data-username');
+        if(toUserId !=  activeUserId){
+            $('.chatboxtitle').html(toUserName);
             $('.chatboxcontent').html('');
             $('.chatboxtextarea').val('');
-            activeUserId = $(this).attr('data-id');
+            activeUserId = toUserId;
         }
-        $('.chatbox').show();
+        $('.chatbox').removeClass('hide').addClass('show');
     });
 
     $(document).on('keypress', '.chatboxtextarea', function(e){
         if (e.keyCode == 13) {
             msg = $(this).val();
-            socket.emit('send_message', { msg: msg, from:'', to:userId  });
+            socket.emit('send_message', { msg: msg, from_name:userSelfName, from_id:userSelfId, to_name:toUserName,  to_id:toUserId  });
             $(this).val('');
         }
     });
+
+    socket.on('send_message', function (msgObj) {
+        console.log(msgObj);
+
+        if(msgObj.from_id == userSelfId || msgObj.to_id == userSelfId){
+            if(msgObj.from_id == userSelfId){
+                fromName = 'You: ';
+            }else{
+                fromName = msgObj.from_name+': '
+            }
+            msgToAdd = fromName+ msgObj.msg;
+            $('.chatboxcontent').append($('<p>').text(msgToAdd));
+            
+            //browserNotify('FROM', message=msgObj.msg, 'user-icon.png');
+        }
+        if($('.chatbox').hasClass('hide')){
+            $('.chatbox').removeClass('hide').addClass('show');
+            toUserId = msgObj.from_id
+            toUserName = msgObj.from_name
+            $('.chatboxtitle').html(toUserName);
+        }
+            
+      });
     
 });
 
 function closeChatBox(){
-    $('.chatbox').hide();
+    $('.chatbox').removeClass('show').addClass('hide');
 }
 
 //CHATING FUNCTIONALITY STARTS ***********************************
-$(function () {
-    $('form').submit(function () {
-      socket.emit('send_message', { msg: $('#m').val() });
-      $('#m').val('');
-      return false;
-    });
-
-
-
-    socket.on('send_message', function (msgObj) {
-      console.log(msgObj);
-      $('#messages').append($('<li>').text(msgObj.msg));
-      browserNotify('FROM', message=msgObj.msg, 'user-icon.png');
-    });
-
-
-  });
-
   function browserNotify(theTitle, theBody, theIcon) {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {

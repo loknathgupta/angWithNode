@@ -62,6 +62,7 @@ app.use(function (req, res, next) {     // req.session.userData = {isLoggedIn:tr
     app.locals.assetsLocation = req.protocol + "://" + req.get('host') + '/assets';
     app.locals.sessUserData = req.session.userData;
     app.locals.configuration = config;
+    console.log(req.session.userData);
     next();
 });
 /************SETTING PARAMETERS TO USE ON VIEW ENDS HERE **********/

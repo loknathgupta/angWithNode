@@ -70,7 +70,7 @@
       socket.on('send_message', function (msgObj) {
         console.log(msgObj);
         $('#messages').append($('<li>').text(msgObj.msg));
-        browserNotify('FROM', message=msgObj.msg, 'user-icon.png');
+        //browserNotify('FROM', message=msgObj.msg, 'user-icon.png');
       });
 
 
