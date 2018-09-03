@@ -16,60 +16,38 @@
 </div>
 <!--Right Side Ends-->
 </div>
-<!-- <div class="chatButtonContainer online">
-    <a class="chatButton--ripple chatButton" href="#">
-        <img height="38px" src="/assets/images/live_chat_icon.png">
-    </a>
-</div> -->
+
 <div id="chatListWindow">
     <div class="chat-box-header">
-            <a href="javascript:void(0);" onclick="showHideChatList();" id="chat-arrow" >
-            Live Chat <span id="total-online">(0 online)</span></a>
+        <a href="javascript:void(0);" id="chat-arrow" >
+            Live Chat
+            <span id="total-online">(Online Users)</span>
+        </a>
 
     </div>
-    <div id="chatUsers">
+    <div id="chatUsers" class="hide">
         <ul>
             <li>
-                <span>
-                    <a href="javascript:void(0)" onclick="javascript:chatWith('531', 'IU User, Archana','1',''); ">Archana</a>
-                    
-                </span>
-            </li>
-            <li>
-                <span>
-                    <a href="javascript:void(0)" onclick="javascript:chatWith('531', 'IU User, Archana','1',''); ">Archana</a>
-                    
-                </span>
-            </li>
-            <li>
-                <span>
-                    <a href="javascript:void(0)" onclick="javascript:chatWith('531', 'IU User, Archana','1',''); ">Archana</a>
-                    
-                </span>
-            </li>
-            <li>
-                <span>
-                    <a href="javascript:void(0)" onclick="javascript:chatWith('531', 'IU User, Archana','1',''); ">Archana</a>
-                    
-                </span>
+                <a href="javascript:void(0)" onclick="javascript:chatWith('531', 'IU User, Archana','1',''); ">Archana</a>
             </li>
         </ul>
 
     </div>
 </div>
-<div id="chatbox_246" class="chatbox" style="bottom: 0px; right: 240px; display: block;">
+<div class="chatbox" >
     <div class="chatboxhead">
         <div class="chatboxtitle">Receiver</div>
         <div class="chatboxoptions">
-            <a href="javascript:void(0)" onclick="javascript:sendChatTranscript('SSU45, Sandeep', '246')">
-            <a href="javascript:void(0)" onclick="javascript:closeChatBox('246')">X</a>
-        </div><br clear="all">
+            <a href="javascript:void(0)" onclick="javascript:closeChatBox()">X</a>
+        </div>
+        <br clear="all">
     </div>
     <div class="chatboxcontent"></div>
     <div class="chatboxinput">
         <textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,'246','');"></textarea>
     </div>
 </div>
+<script src="/socket.io/socket.io.js"></script>
 </body>
 
 

@@ -116,7 +116,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('send_message', function(msgObj){
-        console.log('message: ' + msgObj.msg);
+        console.log(msgObj);
         io.emit('send_message', msgObj)
     });
 

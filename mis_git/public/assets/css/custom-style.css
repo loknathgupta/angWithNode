@@ -600,6 +600,8 @@ a#chat-arrow {
     width: 225px;
     display: none;
     z-index: 1000;
+    bottom: 0;
+    right: 240px;
 }
 .chatboxtitle {
     float: left;

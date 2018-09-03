@@ -14,7 +14,7 @@ import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormTestComponent } from './form-test/form-test.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserListComponent } from './user-list/user-list.component';
+// import { UserListComponent } from './user-list/user-list.component';
 
 
 const appRoutes: Routes = [

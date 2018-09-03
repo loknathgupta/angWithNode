@@ -228,11 +228,11 @@ var User = {
     getOnlineUsersForChat : function(){
         return new Promise(function(resolve, reject){
             db.query('SELECT data FROM sessions', function(err, liveUsersData){
-                console.log(this.sql);
+                // console.log(this.sql);
                 if(err){
                     reject(err);
                 }else{
-                    //console.log(liveUsersData);
+                    // console.log(liveUsersData);
                     resolve(liveUsersData);
                 }
             })

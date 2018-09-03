@@ -5,7 +5,7 @@ var express = require('express');
 var Auth = {
     isLoggedIn: function (req, res, next) {        
         var q = url.parse(req.url, true);
-        if (req.url == '/user/login' || req.url == '/user/forgot-password') {
+        if (req.url == '/user/login' || req.url == '/user/forgot-password' || req.url.match(/\/chat/g) ) {
             next();
         } else {
             //console.log(req.session.userData)
