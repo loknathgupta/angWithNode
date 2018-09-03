@@ -110,12 +110,17 @@ app.use(function (err, req, res, next) {
 //SOCKET EVENT*************************************
 io.on('connection', function(socket){
     console.log('a user connected');
+    socket.username = "Anonymous";
     socket.on('disconnect', function(){
         console.log('user disconnected');
     });
-    socket.on('send message', function(msg){
-        console.log('message: ' + msg);
+
+    socket.on('send_message', function(msgObj){
+        console.log('message: ' + msgObj.msg);
+        io.emit('send_message', msgObj)
     });
+
+    
 });
 //SOCKET EVENT*************************************
 

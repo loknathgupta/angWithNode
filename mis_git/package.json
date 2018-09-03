@@ -6,16 +6,9 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "author": "Loknath Gupta",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
+  "homepage": "http://localhost:7070",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
