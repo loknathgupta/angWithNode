@@ -535,3 +535,111 @@ table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
 .fa.fa-bars{display: none;}
 table.fixedHeader-floating{position:fixed !important;background-color:white}table.fixedHeader-floating.no-footer{border-bottom-width:0}table.fixedHeader-locked{position:absolute !important;background-color:white}@media print{table.fixedHeader-floating{display:none}}
 
+/*CHAT BOX CSS *************************/
+.chatButtonContainer {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1636;
+}
+.chatButton, .chatButton::after, .chatButtonContainer {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+#chatListWindow {
+    overflow: hidden;
+    overflow-y: auto;
+    width: 230px;
+    max-height: 99%;
+    min-height: 1%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    padding: 0 5px;
+}
+a#chat-arrow {
+    display: block;
+    width: 199px;
+    height: 16px;
+    background: url(/assets/images/trial-chat-offarrow.png) right 0px no-repeat;
+    color: #CCFFFF;
+}
+.chat-box-header{
+    background: #176689;
+    width: 100%;
+    color: #ccffff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+}
+#chatUsers{
+    background: #ccc;
+}
+
+#chatUsers ul {
+    padding: 0px;
+    margin: 0px 1px;
+    width: 175px;
+    overflow: hidden;
+    padding: 5px 10px;
+}
+
+#chatUsers ul li {
+    display: block;
+    width:100%;
+    margin: 0px;
+    float: left;
+    list-style: none;
+    color: #666666;
+    padding: 6px 0px;
+}
+.chatbox {
+    position: fixed;
+    width: 225px;
+    display: none;
+    z-index: 1000;
+}
+.chatboxtitle {
+    float: left;
+}
+.chatboxoptions {
+    float: right;
+}
+.chatboxhead {
+    background-color: #176689;
+    padding: 7px;
+    color: #ffffff;
+    border-right: 1px solid #176689;
+    border-left: 1px solid #176689;
+}
+.chatboxcontent {
+    font-family: arial,sans-serif;
+    font-size: 13px;
+    color: #333333;
+    height: 200px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    padding: 7px;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #eeeeee;
+    background-color: #ffffff;
+    line-height: 1.3em;
+}
+.chatboxinput {
+    padding: 5px;
+    background-color: #ffffff;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+.chatboxtextarea {
+    height: 44px;
+    width: 100%;
+    padding: 3px 0pt 3px 3px;
+    border: 1px solid #eeeeee;
+    margin: 1px;
+    overflow: hidden;
+}
