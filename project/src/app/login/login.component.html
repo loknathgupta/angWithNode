@@ -1,0 +1,73 @@
+<div id="login" class="col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1 col-lg-6 col-md-6 col-sm-8 col-xs-10">
+    <div id="login-panel" class="panel panel-default">
+        <div class="panel-body">
+            <div class="login-box">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="logo">
+                            <img src="assets/images/logo.png" class="img-responsive" alt="Responsive image" width="150">
+                        </div>
+                    </div>
+                    <form (ngSubmit)="validateLogin(loginAttempt)" #loginAttempt="ngForm" class="form-signin" id="loginForm" method="post">
+                        <input type="hidden" name="referedFrom" value="<%= referedFrom; %>" >
+                        <div class="col-md-6 left-border">
+                           
+                                <div class="alert alert-danger text-center alert-dismissible" role="alert">
+                                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                   
+                                </div>
+                           
+                            <div class="left-part">
+                                <div class="form-group">
+                                    <label class="control-label" for="UserName">Email</label>
+                                    <input [(ngModel)]="user.loginId" class="form-control input-sm valid validate[required, custom[email]]" id="Email" name="email" data-errormessage-value-missing="A valid email id is required." value="" placeholder="Email" type="text">
+                                   
+                                        <p class="text-danger">
+                                            <span class="field-validation-valid"> </span>
+                                        </p>
+                                  
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label" for="Password">Password</label>
+                                    <div class="input-group stylish-email">
+                                        <input [(ngModel)]="user.password" class="form-control input-sm valid validate[required]" id="password" data-errormessage-value-missing="Password is required." name="password" value="" placeholder="Password" type="password" >
+                                        <span class="input-group-addon">
+                                            <a id="showPass" aria-expanded="false">
+                                                <span class="glyphicon glyphicon-eye-close text-gray" aria-hidden="true"></span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                                                          
+                                    <p class="text-danger">
+                                        <span class="field-validation-valid"></span>
+                                    </p>
+                                    
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-lg-6 padding-left-none">                                            
+                                        <input class="control-label" data-val="true" data-val-required="The Remember me field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" >
+                                        <label for="RememberMe">Remember me</label>
+                                        <p class="text-danger">
+                                            <span class="field-validation-valid" data-valmsg-for="RememberMe" data-valmsg-replace="true"></span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-6 padding-right-none">
+                                        <p class="text-right ">
+                                            <a href="/user/forgot-password">Forgot Password?</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button type="submit" name="LoginButton" class="btn btn-success btn-sm btn-block">
+                                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@ import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormTestComponent } from './form-test/form-test.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { LoginComponent } from './login/login.component';
 // import { UserListComponent } from './user-list/user-list.component';
 
 
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'hero-list', component: HeroListComponent },
-  { path: 'users', component: FormTestComponent }
+  { path: 'users', component: FormTestComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     HeroListComponent,
     HeroDetailComponent,
     FormTestComponent,
-    UserListComponent
+    UserListComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
