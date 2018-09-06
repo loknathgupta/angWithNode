@@ -595,13 +595,17 @@ a#chat-arrow {
     color: #666666;
     padding: 6px 0px;
 }
-.chatbox {
+.chatbox-container{
+    right: 240px;    
     position: fixed;
-    width: 225px;
-    display: none;
+    width: auto;
     z-index: 1000;
     bottom: 0;
-    right: 240px;
+}
+.chatbox {
+    width: 225px;
+    display: none;
+    margin: 10px 0 0 10px;
 }
 .chatboxtitle {
     float: left;

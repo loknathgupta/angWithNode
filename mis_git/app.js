@@ -62,7 +62,7 @@ app.use(function (req, res, next) {     // req.session.userData = {isLoggedIn:tr
     app.locals.assetsLocation = req.protocol + "://" + req.get('host') + '/assets';
     app.locals.sessUserData = req.session.userData;
     app.locals.configuration = config;
-    console.log(req.session.userData);
+    //console.log(req.session.userData);
     next();
 });
 /************SETTING PARAMETERS TO USE ON VIEW ENDS HERE **********/
@@ -107,20 +107,43 @@ app.use(function (err, req, res, next) {
     next(err);
 })
 /************Error HANDLER ENDES HERE*/
-
+var users = [];
+var activeUserDetails ={};
 //SOCKET EVENT*************************************
 io.on('connection', function(socket){
+    //io.sockets.users = [];
     console.log('a user connected');
+    //console.log(socket.id);
     socket.username = "Anonymous";
+    updateOnlineUsers(); 
+    
     socket.on('disconnect', function(){
-        console.log('user disconnected');
+        console.log('a user dis-connected');
+        if(activeUserDetails[socket.id]){
+            let userIdForSocket = activeUserDetails[socket.id]['userId'];
+            users.splice(users.indexOf(userIdForSocket), 1);
+        }       
+        delete activeUserDetails[socket.id];
+        updateOnlineUsers(); 
     });
 
     socket.on('send_message', function(msgObj){
-        console.log(msgObj);
+        //console.log(msgObj);
         io.emit('send_message', msgObj)
     });
 
+    socket.on('makeOnline', function(userObj){    
+        if(users.indexOf(userObj.userId) == -1){
+            activeUserDetails[socket.id] = userObj;
+            users.push(userObj.userId);
+            //io.emit('makeOnline', userObj);
+        }
+        updateOnlineUsers();
+    });
+    function updateOnlineUsers(){
+        //console.log('Online Users Updated...');
+        io.sockets.emit('getOnlineUsers', activeUserDetails);
+    }
     
 });
 //SOCKET EVENT*************************************

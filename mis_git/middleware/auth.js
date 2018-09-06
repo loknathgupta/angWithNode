@@ -16,7 +16,7 @@ var Auth = {
                 }else{
                 // console.log(req._parsedUrl);
                     var path = q.pathname.replace(/^\/|\/$/g, "");
-                    console.log(path);
+                    //console.log(path);
                     slashCount = (path.match(/\//g) || []).length;
                     if(slashCount>1){
                     //console.log(slashCount);
@@ -33,7 +33,7 @@ var Auth = {
                      // path = path.replace(/\/.*$/,"");
                     }
                     path = path.toLowerCase();
-                 console.log(path);
+                 //console.log(path);
                     //path = path.;
                    
                 // console.log(req.session.userData.childMenuAll);
