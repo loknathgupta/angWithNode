@@ -42,7 +42,7 @@ $(function () {
     });
 
     socket.on('send_message', function (msgObj) {
-        console.log(msgObj);
+        //console.log(msgObj);
         var sender = msgObj.from_id;
         var receiver = msgObj.to_id;
         if (msgObj.from_id == userSelfId || msgObj.to_id == userSelfId) {
