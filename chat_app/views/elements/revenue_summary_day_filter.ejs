@@ -1,0 +1,28 @@
+<div class="col-md-12">
+    <div class=" filter-form">
+        <form id="filter-form" method="POST">
+            <div class="col-md-2 ">
+                <div class="form-group filter ">
+                    <label for="exampleInputEmail2 ">Client :</label><br />
+                    <span id="filterByClient"></span>
+                </div>
+            </div>
+   
+    <div class="col-md-6">
+        <div class="form-group filter">
+            <label for="exampleInputName2">Revenue for Month: </label>
+            <br />
+            <div  class='form-group date' >
+                <label for="from">From</label>
+                <input type="text" name="from" id="from-date" value="<%=moment(fromDateInitial).format("DD-MM-YYYY")%>">
+                <label for="to">to</label>
+                <input type="text"  name="to" id="to-date" value="<%=moment(toDateInitial).format("DD-MM-YYYY")%>">
+                <input type="submit" value="Go" class="btn btn-default">
+            </div>
+    </div>
+        
+    </div>
+</form>
+</div>
+
+</div>

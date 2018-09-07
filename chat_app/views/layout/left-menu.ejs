@@ -1,0 +1,109 @@
+<div class="left-nav-inner">
+    <ul class="nav nav-pills nav-stacked left-custom-nav">
+        <% sessUserData.parentMenuAll.forEach(function(menuRow){
+                    
+                 %>
+            <li class="left-nav-item nav-active">
+                <a href="<%=menuRow.router%>">
+                    <i class="fa <%=menuRow.icon%>"></i>
+                    <span>
+                        <%=menuRow.module_name%>
+                    </span>
+                </a>
+
+                <ul class="left-sub-nav-item">
+                    <% sessUserData.childMenuAll.forEach(function(menuRowChild){
+                             if(menuRowChild.parent_id == menuRow.id){ %>
+                        <li>
+                            <a href="<%=menuRowChild.router%>">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                                <%=menuRowChild.module_name%>
+                            </a>
+                        </li>
+                        <% } }); 
+                     if(menuRow.id == 5 && sessUserData.v_usertype.indexOf("SA")>=0){ %>
+                            <!--<li>
+                                <a href="/access">
+                                    <i class="glyphicon glyphicon-list-alt"></i> Manage access Control</a>
+                            </li>-->
+                        <% }    if(menuRow.id == 4 && sessUserData.v_usertype.indexOf("SA") >=0){ %>
+                            <!--<li>
+                                <a href="/activity_log">
+                                    <i class="glyphicon glyphicon-list-alt"></i> Activity Log</a>
+                            </li>-->
+                            <% }%>
+                </ul>
+            </li>
+            <% }); %>
+
+    </ul>
+    <!--<ul class="nav nav-pills nav-stacked left-custom-nav">
+        <li class="left-nav-item nav-active">
+            <a href="/price">
+                <i class="fa fa-home"></i>
+                <span>Price Master</span>
+            </a>
+            <ul class="left-sub-nav-item">
+                <li>
+                    <a href="/price/">
+                        <i class="glyphicon glyphicon-list-alt"></i> Price Master</a>
+                </li>
+            </ul>
+        </li>
+        <li class="left-nav-item nav-active">
+            <a href="/delivery">
+                <i class="fa fa-calendar"></i>
+                <span>Manage Daily Delivery</span>
+            </a>
+            <ul class="left-sub-nav-item">
+                <li>
+                    <a href="/delivery">
+                        <i class="glyphicon glyphicon-list-alt"></i>Daily Delivery</a>
+                </li>
+                <li>
+                    <a href="/change_approval">
+                        <i class="glyphicon glyphicon-list-alt"></i> Approve Change Request
+                    </a>
+                </li>
+                <li>
+                    <a href="/delivery/">
+                        <i class="glyphicon glyphicon-list-alt"></i> Daily Delivery For AM</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="left-nav-item nav-active">
+            <a href="/report/">
+                <i class="fa fa-bars"></i>
+                <span>Report Manager</span>
+            </a>
+            <ul class="left-sub-nav-item">
+                <li>
+                    <a href="/report/">
+                        <i class="glyphicon glyphicon-list-alt"></i> Projected vs Actual Volume Report</a>
+                </li>
+                <li>
+                    <a href="/invoice/">
+                        <i class="glyphicon glyphicon-list-alt"></i> Revenue Report</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="left-nav-item nav-active">
+            <a href="/user/">
+                <i class="fa fa-user"></i>
+                <span>User Manager</span>
+            </a>
+            <ul class="left-sub-nav-item">
+                <li>
+                    <a href="/user/">
+                        <i class="glyphicon glyphicon-list-alt"></i> Manage User</a>
+                </li>
+                <li>
+                    <a href="/access">
+                        <i class="glyphicon glyphicon-list-alt"></i> Manage access Control</a>
+                </li>
+            </ul>
+        </li>
+    </ul>-->
+</div>

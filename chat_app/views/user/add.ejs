@@ -1,0 +1,52 @@
+<% include ../layout/header%>
+<div>
+    <p style="color:red">
+        <%= //msg %>
+    </p>
+    <form action="" enctype="multipart/form-data" method="post">
+        <table item-width="100%">
+            <tr>
+                <td>First-Name</td>
+                <td>
+                    <input type="text" name="first_name" value="<%=data.first_name%>">
+                    <% if(errors.first_name) { %> <div><%=errors.first_name %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Last-Name</td>
+                <td>
+                    <input type="text" name="last_name" value="<%=data.last_name%>">
+                    <% if(errors.last_name) { %> <div><%=errors.last_name %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>
+                    <input type="text" name="email" value="<%=data.email%>">
+                    <% if(errors.email) { %> <div><%=errors.email %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="text" name="password" value="">
+                    <% if(errors.password) { %> <div><%=errors.password %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Profile-Pic</td>
+                <td>
+                    <input type="file" name="pofile_pic" >
+                    <% if(errors.pofile_pic) { %> <div><%=errors.pofile_pic %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" name="Save" value="Save">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<% include ../layout/footer%>

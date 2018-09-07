@@ -1,0 +1,38 @@
+<div class="col-md-12">
+    <div class=" filter-form">
+        
+            <div class="col-md-2 ">
+                <div class="form-group filter ">
+                    <label for="exampleInputEmail2 ">Client :</label><br />
+                    <span id="filterByClient"></span>
+                </div>
+            </div>
+   
+    <div class="col-md-2">
+        <div class="form-group filter">
+            <label for="exampleInputName2">Revenue for Month: </label>
+            <br />
+            <div  class='input-group date' id="from-datepicker">
+        <input type="text" id="from-date" readonly class="form-control" value="<%= fromDateInitial%>">
+       
+        <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            
+            </div>
+    </div>
+        
+    </div>
+    <div class="col-md-4">
+        <div class="form-group filter">
+                <label for="exampleInputName2">Revenue for : </label>
+                <br/>
+                
+                        <label class="radio-inline"><input type="radio" id='radio_mtd' checked value="mtd" name="reporttype"> MTD </label>
+                        <label class="radio-inline"><input type="radio" id='radio_monthly' value="monthly" name="reporttype"> Monthly </label> 
+                 
+            </div>
+            </div>
+</div>
+
+</div>

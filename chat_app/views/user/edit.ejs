@@ -1,0 +1,79 @@
+<% include ../layout/header %>
+<div>
+    <p style="color:red">
+        <%=//msg%>
+    </p>
+    <form action="" enctype="multipart/form-data" method="post" >
+        <table item-width="100%">
+            <tr>
+                <td>Firts Name</td>
+                <td>
+                    <input type="text" name="first_name" value="<%=user.first_name%>">
+                    <% if(errors.first_name) { %> <div><%=errors.first_name %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>
+                    <input type="text" name="last_name" value="<%=user.last_name%>">
+                    <% if(errors.last_name) { %> <div><%=errors.last_name %></div> <% }%>
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>
+                    <input type="text" name="email" value="<%=user.email%>">
+                    <% if(errors.email) { %> <div><%=errors.email %></div> <% }%>
+                </td>
+            </tr>
+             <!-- <tr>
+                <td>Password</td>
+                <td>
+                    <input type="text" name="password" value="">
+                </td>
+            </tr> -->
+
+            <tr>
+                <td>Profile Picture</td>
+                <td>
+                    <% if(user.image) {%>
+                        <input type="hidden" name="deletePic" id="deletePic" value="0">
+                        <input type="hidden" name="oldPic" id="oldPic" value="<%=user.image%>">                        <div id="prof-pic">
+                            <img src="<%=profilePicLocation+user.image%>" width="40">                            
+                            <a href="javascript:removePrfilePic(<%=user.id%>)">Remove Profile Picture</a>
+                            <br>
+                        </div>
+                    <%}%>                    
+                    <input type="file" name="pofile_pic" title="Upload a new profile picture.">
+                    <% if(errors.pofile_pic) { %> <div><%=errors.pofile_pic %></div> <% }%>
+                </td>
+                </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="hidden" name="id" value="<%=user.id%>">
+                    <input type="submit" name="Save" value="Save">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    function removePrfilePic(userId){
+        alert('Photo removed, click Save to update permanently.');
+        $('#prof-pic').html('');
+        $('#deletePic').val(1);
+        // $.ajax({
+        //     url:'/user/removePrfilePic',
+        //     data:{userId:userId},
+        //     type: "POST",
+        //     success: function(){
+        //         alert('Hi');
+        //     },
+        //     error: function(){
+        //         alert('ERROR');
+        //     }
+        // })
+    }
+</script>
+<% include ../layout/footer %>
