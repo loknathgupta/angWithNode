@@ -1,5 +1,5 @@
  var express = require('express');
-// var User = require('../model/userModel');
+ var User = require('../model/userModel');
 // var UserAccess = require('../model/userAccessModel');
 // var Client = require('../model/clientModel');
 // var ActivityLog = require('../model/activityLogModel');
@@ -54,9 +54,51 @@ var router = express.Router();
     });
 });*/
 router.get('/', (req, res, next) => {
+    res.locals.msg = '';
+    User.getUsers()
+    .then(function(users){
+        console.log(users);
+    })
+    .catch(function(err){
+        console.log(err);
+    });
+    let user = new User();
+    User.find({}).then(function(users){
+        console.log(users);
+    })
+    .catch(function(err){
+        console.log(err);
+    });
     res.render('user/add', {
         data: {},
         errors : {}
+    });
+});
+
+router.post('/', (req, res, next) => {
+    res.locals.msg = '';
+    let user = new User(req.body);
+    req.assert('first_name', 'First Name should not be empty.').notEmpty();
+    req.assert('last_name', 'Last Name should not be empty.').notEmpty();
+    req.assert('email', 'Email should not be empty.').notEmpty();
+    req.assert('status', 'Please select Status.').notEmpty();
+    req.assert('role', 'Please select Role.').notEmpty();
+    let errors = req.validationErrors();
+
+    if (errors.length > 0) {
+        for(err of errors){
+            res.locals.msg += err.msg;
+        }
+        console.log(res.locals.msg);
+    } else {
+        user.save().then(function(stausData){
+            console.log(stausData);
+            res.locals.msg = 'User has been added.';
+        });
+    }
+    res.render('user/add', {
+        data: {},
+        errors : errors
     });
 });
 

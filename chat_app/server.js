@@ -89,30 +89,14 @@ app.use(function (err, req, res, next) {
     next(err);
 })
 /************Error HANDLER ENDES HERE*/
-var mongo = require('mongodb');
-var dbUrl = "mongodb://localhost:27017";
-var MongoClient = mongo.MongoClient;
-var db;
-MongoClient.connect(dbUrl, { useNewUrlParser: true }, function(err, client) {
-    if (err){ 
-        console.log('Error here....')
-        next(err);
-    }
-    else{
-        console.log("Database connected...");
-        db = client.db('chat_db');
-        //console.log(db);
-        var server = http.listen('7070', function(err){   
-            if(err){
-                console.log('Error in listening on 7070');
-            } else{
-                console.log('Server is started and listening on 7070');
-            }
-            //console.log(db);
-        });
+
+var server = http.listen('7070', function(err){   
+    if(err){
+        console.log('Error in listening on 7070');
+    } else{
+        console.log('Server is started and listening on 7070');
     }
 });
-
 
 
 var users = [];

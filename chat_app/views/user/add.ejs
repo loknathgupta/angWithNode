@@ -1,9 +1,9 @@
 <% include ../layout/header%>
 <div>
-    <p style="color:red">
-        <%= //msg %>
+    <p style="color:red">        
+        <%= msg %>
     </p>
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action=""  method="post">
         <table item-width="100%">
             <tr>
                 <td>First-Name</td>
@@ -26,6 +26,29 @@
                     <% if(errors.email) { %> <div><%=errors.email %></div> <% }%>
                 </td>
             </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <select name="status">
+                        <option value="">Select</option>
+                        <option value="N">New</option>
+                        <option value="E">Active</option>
+                        <option value="D">In-Active</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                    <td>Role</td>
+                    <td>
+                        <select name="role">
+                            <option value="">Select</option>
+                            <option value="N">Production</option>
+                            <option value="E">QC</option>
+                            <option value="D">TL</option>
+                        </select>
+                    </td>
+                </tr>
+
             <tr>
                 <td>Password</td>
                 <td>

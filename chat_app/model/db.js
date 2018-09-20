@@ -1,15 +1,7 @@
-var mongo = require('mongodb');
-var dbUrl = "mongodb://localhost:27017";
-var MongoClient = mongo.MongoClient;
-var db;
-MongoClient.connect(dbUrl, { useNewUrlParser: true }, function(err, client) {
-    if (err){ 
-        console.log('Error here....')
-        next(err);
-    }
-
-    //console.log("Database connected...");
-    //db = client.db('chat_db');
-    //console.log(db);
-});
-module.exports = db;
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost:27017/test_app';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise; 
+var db = mongoose.connection;
+//console.log(db);
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
