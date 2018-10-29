@@ -10,6 +10,7 @@
 // var fileUploader = require('../middleware/fileUploader');
 // var config = require('../config');
  var url = require('url');
+ const mongoose = require('mongoose');
 
 /***********MULTIPART/FORM-DATA FILE UPLOAD SETTINGS STARTS*******/
 var multer = require('multer');
@@ -53,7 +54,7 @@ var router = express.Router();
         });
     });
 });*/
-router.get('/', (req, res, next) => {
+/*router.get('/', (req, res, next) => {
     res.locals.msg = '';
     User.getUsers()
     .then(function(users){
@@ -62,18 +63,12 @@ router.get('/', (req, res, next) => {
     .catch(function(err){
         console.log(err);
     });
-    let user = new User();
-    User.find({}).then(function(users){
-        console.log(users);
-    })
-    .catch(function(err){
-        console.log(err);
-    });
+    
     res.render('user/add', {
         data: {},
         errors : {}
     });
-});
+});*/
 
 router.post('/', (req, res, next) => {
     res.locals.msg = '';
@@ -89,18 +84,63 @@ router.post('/', (req, res, next) => {
         for(err of errors){
             res.locals.msg += err.msg;
         }
-        console.log(res.locals.msg);
+        res.render('user/add', {
+            data: (errors.length > 0) ? req.body : {},
+            errors : errors
+        });
     } else {
         user.save().then(function(stausData){
-            console.log(stausData);
             res.locals.msg = 'User has been added.';
         });
+        res.redirect('user/');
     }
-    res.render('user/add', {
-        data: {},
-        errors : errors
+    
+});
+
+router.get('/list', function(req, res, next){
+    User.getUsers()
+    .then(function(users){
+        res.render('user/index',{
+            userList : users
+        })
+    })
+    .catch(function(err){
+        next(err);
     });
 });
+
+router.get('/', (req, res, next)=>{
+    User.find()
+    .then(users=>{
+        res.status(200).json(
+            users
+        )
+    })
+    .catch(err=>{
+        res.status(400).json({
+            error:err
+        })
+    })
+});
+router.post('/add', (req, res, next)=>{
+    console.log(req.body);
+    let user = new User(req.body);
+    user['_id'] = new mongoose.Types.ObjectId();
+    user.save()
+    .then(result=>{
+        res.status(200).json(
+            user
+        )
+    })
+    .catch(err=>{
+        res.status(400).json({
+            error:err
+        })
+    })
+    
+});
+
+
 
 
 

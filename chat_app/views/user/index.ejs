@@ -1,19 +1,19 @@
-<% include ../layout/header %>
+<% // include ../layout/header %>
 
     <!--Left Side Starts-->
     <div class="fix-left-side left-side-menu">
         <!--Logo Area Starts-->
-        <% include ../layout/logo-section %>
+        <% // include ../layout/logo-section %>
             <!--Logo Area Ends-->
             <!--Left side Menu Starts-->
-            <% include ../layout/left-menu %>
+            <% // include ../layout/left-menu %>
                 <!--Left Menu Ends-->
     </div>
     <!--Left Side Ends-->
     
 
             <!--Header Right Menu starts-->
-            <% include ../layout/header-right-menu %>
+            <% // include ../layout/header-right-menu %>
                 <!--Header Right Menu Ends-->
 
         </div>
@@ -60,14 +60,11 @@
                                         <th>Id</th>
                                         <th width= "5">#</th>                                   
                                         <th width= "20" class="sorting_asc fixwidth" tabindex="0" aria-controls="editable-table" nowrap>First Name</th>
-                                        <!-- <th  class="sorting" tabindex="0" aria-controls="editable-table">Middle Name</th> -->
                                         <th width= "15" class="sorting fixwidth" tabindex="0" aria-controls="editable-table" nowrap>Last Name</th>
                                         <th width= "15" class="sorting" tabindex="0" aria-controls="editable-table">Email</th>
                                         <th width= "15" class="sorting" tabindex="0" aria-controls="editable-table">Emp. Code</th>
                                         <th width="15" class="sorting fixwidth" tabindex="0" aria-controls="editable-table">Role</th>
-                                        <th width="20" class="sorting fixwidth" tabindex="0" aria-controls="editable-table">Reporing Manager</th>
                                         <th width="10" class="sorting" tabindex="0" aria-controls="editable-table">Status</th>
-                                        <!-- <th class="sorting" tabindex="0" aria-controls="editable-table">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>                                        
@@ -77,15 +74,14 @@
                                          userList.forEach(function(userList){
                                     %>
                                     <tr class="odd" role="row">       
-                                        <td><%= userList.id %></td> 
-                                        <td class="sorting_1"><%= i++ %></td>                               
+                                        <td><%= userList._id %></td> 
                                         <td><%= userList.first_name %></td>
                                         <td><%= userList.last_name %></td>
                                         <td><%= userList.email %></td>
-                                        <td><%= userList.employee_code %></td>
-                                        <td class="user_role" role-id="<%= userList.user_role_id %>"><%= userList.name.replace(/,/g, ", "); %></td>                                        
-                                        <td id="<%= userList.reporting_manager_id %>" class="reportingManager"><%= userList.reporting_manager %></td>
-                                        <td class="user_status" status="<%= userList.status%>"> <%= configuration.UserStatus[userList.status] %></td>                                                                  
+                                        <td><%= userList.email %></td>
+                                        <td><%= userList.email %></td>
+                                        <td><%= userList.email %></td>
+                                        <td><%= userList.email %></td>
                                     </tr>
                                     <% 
                                         });

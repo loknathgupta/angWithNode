@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://localhost:27017/test_app';
+var mongoDB = 'mongodb://localhost:27017/test_app2';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise; 
 var db = mongoose.connection;

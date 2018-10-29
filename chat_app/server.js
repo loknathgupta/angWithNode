@@ -12,6 +12,7 @@ app.use(express.static(__dirname+'public'));
 /************Body Parser */
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 /********************** */
 
 /***************SESSION ************/
@@ -77,8 +78,8 @@ app.get('/', function(req, res){
     res.render('sample/add');
 })
 
-var userRoute = require('./router/userRouter');
-app.use('/user', userRoute);
+var apiUserRoute = require('./router/api/userRouter');
+app.use('/api/user', apiUserRoute);
 
 
 /************Error HANDLER */
