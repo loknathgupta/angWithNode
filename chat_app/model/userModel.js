@@ -5,7 +5,12 @@ let userSchema = new Schema({
     _id : Schema.Types.ObjectId,
     first_name: {type: String, required: true, max: 100},
     last_name: {type: String,  max: 100},
-    email: {type: String, required: true, index: true, unique: true },
+    email: {
+        type: String,
+        validate: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 
+        required: true, 
+        index: true, 
+        unique: true },
     password : {type: String, required: true},
     role: {type: String, required: true},
     status: {type: String, required: true},
