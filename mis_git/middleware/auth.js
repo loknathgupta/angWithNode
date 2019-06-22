@@ -1,7 +1,7 @@
 
 
 var url = require('url');
-var express = require('express');
+//var express = require('express');
 var Auth = {
     isLoggedIn: function (req, res, next) {        
         var q = url.parse(req.url, true);

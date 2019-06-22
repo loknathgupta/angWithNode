@@ -18,7 +18,7 @@ var UserAccess = {
     },
     getPMenuByRole: function (role_id, userType, callback) {
         if(userType.indexOf("SA") < 0){
-        return db.query(`select  distinct Parent.id, Parent.module_name , Parent.router, Parent.icon from module as Child inner join module as Parent on Child.parent_id = Parent.id inner join module_access ModuleAccess on ModuleAccess.module_id = Child.id where ModuleAccess.role_id in (${role_id}) ORDER BY Parent.sort_order`, callback);
+        return db.query(`select  Parent.id, Parent.module_name , Parent.router, Parent.icon from module as Child inner join module as Parent on Child.parent_id = Parent.id inner join module_access ModuleAccess on ModuleAccess.module_id = Child.id where ModuleAccess.role_id in (${role_id}) GROUP BY Parent.id ORDER BY Parent.sort_order`, callback);
         }else{
             console.log(userType);
             UserAccess.getMenu('0',callback);
@@ -26,7 +26,7 @@ var UserAccess = {
     },
     getCMenuByRole: function (role_ids, userType, callback) {
         if(userType.indexOf("SA") < 0){
-        return db.query(`select  distinct Child.id, Child.module_name , Child.router,Child.parent_id, Child.icon, (select group_concat(router) from module_sub_pages ModuleSubPages where ModuleSubPages.module_id = Child.id or  ModuleSubPages.module_id =0 ) as sub_router from module as Child inner join module_access ModuleAccess on ModuleAccess.module_id = Child.id where ModuleAccess.role_id in (${role_ids}) ORDER BY Child.sort_order`, callback);
+        return db.query(`select  Child.id, Child.module_name , Child.router,Child.parent_id, Child.icon, (select group_concat(router) from module_sub_pages ModuleSubPages where ModuleSubPages.module_id = Child.id or  ModuleSubPages.module_id =0 ) as sub_router from module as Child inner join module_access ModuleAccess on ModuleAccess.module_id = Child.id where ModuleAccess.role_id in (${role_ids}) GROUP BY Child.id  ORDER BY Child.sort_order`, callback);
         }else{
             console.log(userType);
             UserAccess.getAllChild(callback);

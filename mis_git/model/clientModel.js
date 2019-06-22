@@ -1,5 +1,5 @@
 var db = require('./db');
-var dbMis = require('./db_mis');
+//var dbMis = require('./db_mis');
 
 
 var Client = {
@@ -14,7 +14,7 @@ var Client = {
         return db.query('UPDATE tbl_client SET ? WHERE ?', [fieldsWithValues, conditions], callback)
     },
     exportClientFromMis: function(req,callback){
-        dbMis.query('SELECT * FROM tbl_client ORDER BY i_clientid desc', function (err, result){
+        db.query('SELECT * FROM tbl_client ORDER BY i_clientid desc', function (err, result){
            if (err) throw err;
            
            Object.keys(result).forEach(function(key) {

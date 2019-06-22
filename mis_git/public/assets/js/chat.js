@@ -85,8 +85,6 @@ $(function () {
         }
     });
 
-    $
-
     $(document).on('click', '.close-chatbox', function(){
         $(this).parents('.chatbox').removeClass('show').addClass('hide');
     });

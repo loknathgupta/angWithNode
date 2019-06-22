@@ -1,0 +1,54 @@
+<div>
+   <div id="selfName">
+       <input type="text" name="sname" id="sname">
+       <input type="button" id="submit" value="Submit">
+   </div>
+
+   <div id="names"> </div>
+
+   <div id="chatWindow" style="display:none;">
+        <input type="text" name="chat" id="chat">
+        <input type="button" id="csubmit" value="Submit">
+    </div>
+
+    <div id="messages"></div>       
+    
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io();
+    $(function(){
+
+        $(document).on('click', '#submit', function(){
+            let name = $('#sname').val();
+            $('#selfName').hide();
+            $('#chatWindow').show();
+            socket.emit('addMe', name,function(data){
+                //alert(data);
+            });
+        });
+
+        $(document).on('click', '#csubmit', function(){
+            let message = $('#chat').val();
+            alert(message);
+            
+            socket.emit('sendMessage', message, function(data){
+                alert(data);
+            });
+        })
+
+        socket.on('addedUsers', function(users){            
+            $('#names').html('');
+            users.forEach(element => {
+                $('#names').append(element+'<br>');
+            });
+        });
+
+        socket.on('newMessage', function(msgObj){ 
+            console.log(msgObj);           
+            $('#messages').append('<span class="msg">'+msgObj.msg+'</span><br/>')
+        });
+    })
+</script>
